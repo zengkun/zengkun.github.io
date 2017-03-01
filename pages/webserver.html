@@ -25,335 +25,158 @@
 	</div>
 <div id="md" style="display: none;">
 <!-- markdown -->
-## Git相关下载
-  <https://git-scm.com/download/win>
-  <https://download.tortoisegit.org/tgit/2.4.0.0/TortoiseGit-2.4.0.0-64bit.msi>
-  <https://download.tortoisegit.org/tgit/2.4.0.0/TortoiseGit-LanguagePack-2.4.0.0-64bit-zh_CN.msi>
+## 浏览器跨域访问（Chrome）
+##### 同源策略是浏览器最基本的安全策略，它认为任何站点的内容都是不安全的，所以当脚本运行时，只被允许访问来自同一站点的资源。同源是指域名、协议、端口都相同。
+    
+- Windows：
+    属性-目标路径添加
+    ` --args --disable-web-security --user-data-dir`  （注意前面加空格）
+    
+- OSX：
+    `$ open -a Google\ Chrome --args --disable-web-security --user-data-dir·`
 
+- Chrome49-老版本不添加` --user-data-dir`
 
-## Gitlab clone
+## Apache（Wamp）
+##### Apache是世界使用排名第一的Web服务器软件。它可以运行在几乎所有广泛使用的计算机平台上，由于其跨平台和安全性被广泛使用，是最流行的Web服务器端软件之一。
 
-#### clone项目 复制地址时 因SSH会有端口号问题  故选https
-* 直接clone：（带上用户名、密码）
-``` bash
-git clone https://用户名:用户密码@gitURL
-```
+- 安装
 
-* 弹出登录clone：（不带用户名、密码）
-``` bash
-git clone gitURL
-```
+- 修改 httpd.conf 配置文件
+    * 修改 DocumentRoot 路径（两处）
+    * 开启 SSI
+        + 去掉“#”注释` #LoadModule ssl_module modules/mod_ssl.so`
+        + `AddType text/html .shtml .html`  （添加需要引入的文件类型）
+        + `AddOutputFilter INCLUDES .shtml .html`  （添加需要引入的文件类型）
+        + `Options Indexes FollowSymLinks` 改为 `Options Indexes FollowSymLinks INCLUDES IncludesNOEXEC`
 
-#### 若在windows下用 git clone gitURL 
-* 提示：SSL certificate problem: self signed certificate
-``` bash
-此问题在windows下出现得频率高些。我估计主要是git本身就是基于linux开发的，
-在windows上，容易缺失一些环境。参考了一些文章，解决方法其实就是“直接不管ssl证书的事儿”
-```
+## Nginx
+##### Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。
 
-* 用git自带的配置命令：
-``` bash
-git config --global http.sslVerify false
-``` 
+- 安装
 
-#### 常用命令记录
-* 创建分支
-``` bash
-git branch
-```
-* 切换分支
-``` bash
-git checkout 
-```
-* 两个使用过的分支来回切换
-``` bash
-git checkout -
-```
-* 重命名
-``` bash
-git mv oldfilename newfilename 
-```
-* 单行查看log列表
-``` bash
-git log --pretty=oneline
-```
+- 修改 `httpd.conf` 配置文件
+    * 修改 `DocumentRoot` 路径（两处）
+    * nginx配置SSI （location / {  内  }）
+      主要是三个参数，`ssi，ssi_silent_errors和ssi_types`，均可以放在`http,server和location`的作用域下。 
+       1.`ssi on`     开启ssi支持，默认是off 
+        2.`ssi_silent_errors on`     默认值是off，开启后在处理SSI文件出错时不输出错误提示:`”[an error occurred while processing the directive] ”` 
+        3.`ssi_types`   默认是`ssi_types text/html`，所以如果需要htm和html支持，则不需要设置这句，如果需要shtml支持，则需要设置：`ssi_types text/shtml` 即：
 
-* 修改提交信息、合并多次提交为一次记录
-``` bash
-git rebase -i HEAD  （HEAD^/HEAD^^/...   或者某一次提交前一次的hash值）
+            ssi on;  
+            ssi_silent_errors on;  
+            ssi_types text/shtml;   
 
-根据命令提示修改信息，保存退出编辑器
-r/reword  修改提交信息    修改当前的提交信息
-s/squash  合并提交        合并多条（多行）提交信息为一条
-```
+- 启动方式和相关命令
+    * 启动
+        + 直接点击Nginx目录下的`nginx.exe`
+        + cmd运行`start nginx`（需在安装目录）
+    * 关闭
+        + 任务管理器结束nginx进程
+        + DOS命令  
+            `nginx -s stop    或者    nginx -s quit` 
 
-* 更新本地和远程同步（覆盖本地）
+            `stop`表示立即停止nginx,不保存相关信息  
+            `quit`表示正常退出nginx,并保存相关信息
 
-1\. 第一种方法
-``` bash
-git fetch --all 
-git reset --hard origin/master
-git pull
+    * 重启(因为改变了配置,需要重启)
 
-说明：git fetch下载远程最新的， 然后，git reset master分支重置
-```
-2\. 第二种方法
-``` bash
-git reset --hard HEAD 
-git pull
+ `nginx -s reload`
+    * 即：
 
-说明：重置回某次（提交的HASH）提交的状态
-```
-* 还原未提交的修改
-``` bash
-git checkout .
-```
+            start nginx
+            nginx -s quit  (nginx -s stop)
+            nginx -s reload
 
-* windows下新建无名称的文件
-``` bash
-1. 在需要创建  .gitignore 文件的文件夹, 右键选择
-Git Bash 进入命令行，进入项目所在目录。
-2. 输入
+    * 例：  
 
-touch .gitignore
+            d:  
+            cd nginx-1.9.6
 
-在文件夹就生成了一个“.gitignore”文件。
-然后在”.gitignore” 文件里输入你要忽略的文件夹及其文件就可以了。
-```
-
-
-* 查看配置
-``` bash
-git config --list
-git config user.name (具体配置)
-```
-
-* 设置打开编辑器
-``` bash
-在Windows下Git的默认编辑器是vim。如果想换成其它的编辑器，比如 Sublime Text 可以使用如下方法：
-需要为编辑器的路径单独添加单引号，否则配置不会成功
-
-git config --global core.editor "'D:\SublimeText_XP85\Sublime_Text_Build_3095_x64_CHS_Lfqy_Green\Sublime Text\sublime_text.exe' -w"
-```
-
-* rebase操作中断时，会出现git不在任何分支上 解决：
-1. 是无风险的操作，会回到rebase操作之前的状态，2个分支的commits毫发无损。
-``` bash
-常用
-
-git rebase --abort
-```
-2. 是高风险的操作，引起冲突的commits会被丢弃（这部分代码修改会丢失）。
-``` bash
-git rebase --skip
-```
-3. 在rebase的过程中，也许会出现冲突(conflict). 
-``` bash
-在这种情况，Git会停止rebase并会让你去解决 冲突；在解决完冲突后，用"git-add"命令去更新这些内容的索引(index), 然后，你无需执行 git-commit,只要执行:
-
-$ git rebase --continue
-
-这样git会继续应用(apply)余下的补丁。
-在任何时候，你可以用--abort参数来终止rebase的行动，并且"mywork" 分支会回到rebase开始前的状态。
-
-$ git rebase --abort
-```
-
-## Git-FTP
-<https://github.com/git-ftp/git-ftp#readme>
-
-#### 安装
-参考：<br>
-<http://anantgarg.com/2013/09/25/git-ftp-for-windows/>
-
-    cd ~
-    git clone https://github.com/git-ftp/git-ftp git-ftp.git
-    cd git-ftp.git && chmod +x git-ftp
-    cp ~/git-ftp.git/git-ftp /bin/git-ftp
-
-#### 使用
-1. 配置ftp信息
-``` bash
-cd kuyun-eye 目录
-git config git-ftp.user 用户名
-git config git-ftp.url ftp://IP或地址:端口/目录
-git config git-ftp.password 密码
-```
-
-2. Upload all files 第一次会上传所有文件到ftp目录
-``` bash
-git ftp init
-```
-
-3. Or if the files are already there
-``` bash
-git ftp catchup
-```
-
-4. 更新到ftp
-``` bash
-git ftp push
-```
-
-说明：
-这个工具有两个是我们感兴趣的:init和push,init命令是只用于第一次使用和上传你git仓库的所有文件到一个ftp服务器里面，并且它会创建一个小文件.git-ftp.log在服务器上面,它用于校验当前部署到服务器的提交(commit)。你可以运行它像:
-``` bash
-git ftp init --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/path/to/website/
-```
-在初始化 ftp 服务器之后你可以在git中开始一个新的提交(commit) 和 部署改变的文件，使用git-ftp的push命令：
-``` bash
-git ftp push --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/path/to/website/
-```
-总结：
-使用git-ftp可以很方便的将git仓库中修改了的文件部署到ftp服务器上面.在部署之后,或许需要通过ftp工具，检查部署之后的文件夹是否发布到正确的位置。
-
-排查问题的小技巧:
-如果 catchup 失败，从默认给出的错误信息根本定位不了问题，或者说是 debug 信息就是错误的。可以在所有命令后面加上 -vv 来查看具体的 debug 信息, 例如
-``` bash
-git ftp catchup -vv
-
--vv 的说明
--vv Be as verbose as possible. Useful for debug information.
-```
-
-## GitHuB
-
-#### GitHub——如何更新已经fork的代码
-github上有个很方便的功能叫fork，将别人的工程一键复制到自己账号下。这个功能很方便，但有点不足的是，当源项目更新后，你fork的分支并不会一起更新，需要自己手动去更新。下面记录下网上找到的更新的方法
-
-##### 参考
-<https://help.github.com/articles/fork-a-repo>
-<http://www.shizuwu.cn/post/669.html>
-<http://segmentfault.com/q/1010000000095921>
-<http://my.oschina.net/luffyke/blog/70336>
-
-##### 步骤流程
-1. 在本地装好github客户端或git客户端
-2. clone 自己的fork分支到本地，可以直接使用github客户端，clone到本地，如果使用命令行，命令为：
-``` bash
-git clone gitURL
-```
-3. 增加源分支地址到你项目远程分支列表中(此处是关键)，先得将原来的仓库指定为upstream，命令为：
-``` bash
-git remote add upstream https://github.com/被fork的仓库.git
-
-此处可使用git remote -v查看远程分支列表
-```
-4. fetch源分支的新版本到本地
-``` bash
-git fetch upstream
-```
-5. 合并两个版本的代码
-``` bash
-git merge upstream/master
-```
-6. 将合并后的代码push到github上去
-``` bash
-git push origin master
-```
-##### 官方解决办法
-    git fetch upstream
-    # Fetches any new changes from the original repository
-
-    git merge upstream/master
-    # Merges any changes fetched into your working files
-
-##### 更新fork的代码总结
-1. 第一种方法
-``` bash
-git remote add upstream gitURL
-git remote -v
-git fetch upstream
-git merge upstream/master
-git push origin master
-```
-2. 第二种方法
-``` bash
-git pull gitURL master (远程仓库)
-git push gitURL master 
-或 
-git push origin master (自己的仓库)
-```
-##### PS
-其实 fork 本身就是个 copy, 所以删除重新fork，还是保持master干净，随时pull上游的更新都是可以的。
-用git的话，自己的修改最好是新开一个branch，这样就不影响fork的哪个branch继续从原始地方pull
-
-## GitHug教程
-<http://www.jianshu.com/p/1910053e65f7><br>
-<https://githug.zhang-ou.com/>
-
-#### 安装ruby
-查看是否安装成功
-``` bash
-ruby --version
-```
-#### 安装githug 
-``` bash
-gem install githug 
-```
-需要翻墙，报错
-参考：<br>
-<http://blog.csdn.net/chinazgr/article/details/52932391>
-
-使用镜像（详情见参考地址）
-``` bash
-gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
-或
-gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
-
-C:\Users\kun>gem sources -l
-*** CURRENT SOURCES ***
-```
-
-然后再安装一遍
-``` bash
-gem install githug
-```
-
-#### 执行githug进入闯关游戏
-闯关教程：<br>
-<http://www.jianshu.com/p/1910053e65f7><br>
-<https://githug.zhang-ou.com/>
-
-``` bash
-No githug directory found, do you wish to create one? [yn]y
-Welcome to Githug!
-
-y 当前目录下创建一个名为git_hug子目录，然后进入目录
-
-cd git_hug
-```
-
-##### 开始闯关
-1. 有一个新的目录“git_hug”被创建了，在它里面初始化一个仓库
-``` bash
-git init
-```
-2. 设置你的用户名与电子邮箱，这很重要，只有这样你的提交才会被识别
-``` bash
-git config --local user.name 用户名
-git config --local user.email 用户邮箱
-```
-3. 有一个名叫“README”的文件夹，你要将它加入到暂存区。
- 注意：每一关都是一个新仓库，不要在前面的关卡找文件。
-``` bash
-git add README
-```
-4. “README”文件已经被加入到暂存区，现在提交它。
-``` bash
-git commit -m "add README"
-```
-5. 从“https://github.com/Gazler/cloneme”克隆仓库。
-``` bash
-git clone https://github.com/Gazler/cloneme
-```
-......
-
+## 其他
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
 <!-- content -->
+<h2 id="chrome">浏览器跨域访问（Chrome）</h2>
 
+<h5 id="">同源策略是浏览器最基本的安全策略，它认为任何站点的内容都是不安全的，所以当脚本运行时，只被允许访问来自同一站点的资源。同源是指域名、协议、端口都相同。</h5>
+
+<ul>
+<li><p>Windows：
+属性-目标路径添加
+<code>--args --disable-web-security --user-data-dir</code>  （注意前面加空格）</p></li>
+<li><p>OSX：
+<code>$ open -a Google\ Chrome --args --disable-web-security --user-data-dir·</code></p></li>
+<li><p>Chrome49-老版本不添加<code>--user-data-dir</code></p></li>
+</ul>
+
+<h2 id="apachewamp">Apache（Wamp）</h2>
+
+<h5 id="apachewebweb">Apache是世界使用排名第一的Web服务器软件。它可以运行在几乎所有广泛使用的计算机平台上，由于其跨平台和安全性被广泛使用，是最流行的Web服务器端软件之一。</h5>
+
+<ul>
+<li><p>安装</p></li>
+<li><p>修改 httpd.conf 配置文件</p>
+
+<ul><li>修改 DocumentRoot 路径（两处）</li>
+<li>开启 SSI
+<ul><li>去掉“#”注释<code>#LoadModule ssl_module modules/mod_ssl.so</code></li>
+<li><code>AddType text/html .shtml .html</code>  （添加需要引入的文件类型）</li>
+<li><code>AddOutputFilter INCLUDES .shtml .html</code>  （添加需要引入的文件类型）</li>
+<li><code>Options Indexes FollowSymLinks</code> 改为 <code>Options Indexes FollowSymLinks INCLUDES IncludesNOEXEC</code></li></ul></li></ul></li>
+</ul>
+
+<h2 id="nginx">Nginx</h2>
+
+<h5 id="nginxwebimappop3bsdlike">Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。</h5>
+
+<ul>
+<li><p>安装</p></li>
+<li><p>修改 <code>httpd.conf</code> 配置文件</p>
+
+<ul><li>修改 <code>DocumentRoot</code> 路径（两处）</li>
+<li><p>nginx配置SSI （location / {  内  }）
+主要是三个参数，<code>ssi，ssi_silent_errors和ssi_types</code>，均可以放在<code>http,server和location</code>的作用域下。 
+1.<code>ssi on</code>     开启ssi支持，默认是off 
+2.<code>ssi_silent_errors on</code>     默认值是off，开启后在处理SSI文件出错时不输出错误提示:<code>”[an error occurred while processing the directive] ”</code> 
+3.<code>ssi_types</code>   默认是<code>ssi_types text/html</code>，所以如果需要htm和html支持，则不需要设置这句，如果需要shtml支持，则需要设置：<code>ssi_types text/shtml</code> 即：</p>
+
+<pre><code>ssi on;  
+ssi_silent_errors on;  
+ssi_types text/shtml;   
+</code></pre></li></ul></li>
+<li><p>启动方式和相关命令</p>
+
+<ul><li>启动
+<ul><li>直接点击Nginx目录下的<code>nginx.exe</code></li>
+<li>cmd运行<code>start nginx</code>（需在安装目录）</li></ul></li>
+<li><p>关闭</p>
+
+<ul><li>任务管理器结束nginx进程</li>
+<li><p>DOS命令 <br>
+<code>nginx -s stop    或者    nginx -s quit</code> </p>
+
+<p><code>stop</code>表示立即停止nginx,不保存相关信息 <br>
+<code>quit</code>表示正常退出nginx,并保存相关信息</p></li></ul></li>
+<li><p>重启(因为改变了配置,需要重启)</p></li></ul>
+
+<p><code>nginx -s reload</code></p>
+
+<ul><li><p>即：</p>
+
+<pre><code>start nginx
+nginx -s quit  (nginx -s stop)
+nginx -s reload
+</code></pre></li>
+<li><p>例：  </p>
+
+<pre><code>d:  
+cd nginx-1.9.6
+</code></pre></li></ul></li>
+</ul>
+
+<h2 id="">其他</h2>
 <!-- content end -->
 </div>
 <br>

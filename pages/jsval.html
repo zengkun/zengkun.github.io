@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>学习笔记</title>
+    <link rel="shortcut icon" href="/favicon.jpg"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+### 一：JavaScript静态页面值传递之URL篇
+
+能过URL进行传值.把要传递的信息接在URL上.
+
+Post.html
+```
+<input type="text" name="username">
+<input type="text" name="sex">
+<input type="button" value="Post">
+```
+```
+function Post() {
+	// 单个值 Read.html?username=baobao;
+	// 多全值 Read.html?username=baobao&sex=male;
+	　　
+	url = "Read.html?username=" + escape(document.all.username.value);
+	url += "&sex=" + escape(document.all.sex.value);
+	location.href = url;
+}
+```
+
+Read.html
+```
+/*
+ *--------------- Read.html -----------------
+ * Request[key]
+ * 功能:实现ASP的取得URL字符串,Request("AAA")
+ * 参数:key,字符串.
+ * 实例:alert(Request["AAA"])
+ *--------------- Request.html -----------------
+ */
+```
+```
+var url = location.search;
+var Request = new Object();
+if (url.indexOf("?") != -1) {
+	var str = url.substr(1)　 // 去掉?号
+		　　 strs = str.split("&");
+	for (var i = 0; i < strs.length; i++) {　
+		Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+	}
+}
+alert(Request["username"])
+alert(Request["sex"])
+```
+```
+function Request(strName) {
+	var strHref = "www.xxx.com/index.html?a=1&b=1&c=测试测试";
+	var intPos = strHref.indexOf("?");
+	var strRight = strHref.substr(intPos + 1);
+	var arrTmp = strRight.split("&");
+	for (var i = 0; i < arrTmp.length; i++) {
+		var arrTemp = arrTmp[i].split("=");
+		if (arrTemp[0].toUpperCase() == strName.toUpperCase()) return arrTemp[1];
+	}
+	return "";
+}
+alert(Request("a"));
+alert(Request("b"));
+alert(Request("c"));
+```
+```
+String.prototype.getQuery = function(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	var r = this.substr(this.indexOf("?") + 1).match(reg);
+	if (r != null) return unescape(r[2]);
+	return null;
+}
+var str = "www.xxx.com/index.html?a=1&b=1&c=测试测试";
+alert(str.getQuery("a"));
+alert(str.getQuery("b"));
+alert(str.getQuery("c"));
+```
+* 优点：取值方便.可以跨域
+* 缺点：值长度有限制
+
+### 二：JavaScript静态页面值传递之Cookie篇
+
+Cookie是浏览器存储少量命名数据.
+它与某个特定的网页或网站关联在一起.
+Cookie用来给浏览器提供内存,
+以便脚本和服务器程序可以在一个页面中使用另一个页面的输入数据.
+Post.html
+
+```
+<input type="text" name="txt1">
+<input type="button" value="Post">
+```
+```
+function setCookie(name, value) {
+	/*
+	 *--------------- setCookie(name,value) -----------------
+	 * setCookie(name,value)
+	 * 功能:设置得变量name的值
+	 * 参数:name,字符串;value,字符串.
+	 * 实例:setCookie('username','baobao')
+	 *--------------- setCookie(name,value) -----------------
+	 */
+	var Days = 30; // 此 cookie 将被保存 30 天
+	　　
+	var exp　 = new Date();
+	exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+	document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+	location.href = "Read.html"; //接收页面.
+}
+```
+Read.html
+
+```
+function getCookie(name) {
+	/*
+	 *--------------- getCookie(name) -----------------
+	 * getCookie(name)
+	 * 功能:取得变量name的值
+	 * 参数:name,字符串.
+	 * 实例:alert(getCookie("baobao"));
+	 *--------------- getCookie(name) -----------------
+	 */
+	var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+	if (arr != null) return unescape(arr[2]);
+	return null;
+}
+alert(getCookie("baobao"));
+```
+* 优点：可以在同源内的任意网页内访问.生命期可以设置
+* 缺点:：值长度有限制
+
+### 三：JavaScript静态页面值传递之Window.open篇
+这两窗口之间存在着关系.父窗口parent.html打开子窗口son.html
+子窗口可以通过window.opener指向父窗口.这样可以访问父窗口的对象.
+
+Post.html
+
+```
+<input type="text" name="maintext">
+<input type="button" value="Open">
+```
+Read.html
+
+```
+// window.open打开的窗口.
+// 利用opener指向父窗口.
+var parentText = window.opener.document.all.maintext.value;
+alert(parentText);
+```
+* 优点：取值方便.只要window.opener指向父窗口,就可以访问所有对象.不仅可以访问值,还可以访问父窗口的方法.值长度无限制
+* 缺点：两窗口要存在着关系.就是利用window.open打开的窗口.不能跨域
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<h3 id="javascripturl">一：JavaScript静态页面值传递之URL篇</h3>
+
+<p>能过URL进行传值.把要传递的信息接在URL上.</p>
+
+<p>Post.html</p>
+
+<pre><code>&lt;input type="text" name="username"&gt;
+&lt;input type="text" name="sex"&gt;
+&lt;input type="button" value="Post"&gt;
+</code></pre>
+
+<pre><code>function Post() {
+    // 单个值 Read.html?username=baobao;
+    // 多全值 Read.html?username=baobao&amp;sex=male;
+    　　
+    url = "Read.html?username=" + escape(document.all.username.value);
+    url += "&amp;sex=" + escape(document.all.sex.value);
+    location.href = url;
+}
+</code></pre>
+
+<p>Read.html</p>
+
+<pre><code>/*
+ *--------------- Read.html -----------------
+ * Request[key]
+ * 功能:实现ASP的取得URL字符串,Request("AAA")
+ * 参数:key,字符串.
+ * 实例:alert(Request["AAA"])
+ *--------------- Request.html -----------------
+ */
+</code></pre>
+
+<pre><code>var url = location.search;
+var Request = new Object();
+if (url.indexOf("?") != -1) {
+    var str = url.substr(1)　 // 去掉?号
+        　　 strs = str.split("&amp;");
+    for (var i = 0; i &lt; strs.length; i++) {　
+        Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+    }
+}
+alert(Request["username"])
+alert(Request["sex"])
+</code></pre>
+
+<pre><code>function Request(strName) {
+    var strHref = "www.xxx.com/index.html?a=1&amp;b=1&amp;c=测试测试";
+    var intPos = strHref.indexOf("?");
+    var strRight = strHref.substr(intPos + 1);
+    var arrTmp = strRight.split("&amp;");
+    for (var i = 0; i &lt; arrTmp.length; i++) {
+        var arrTemp = arrTmp[i].split("=");
+        if (arrTemp[0].toUpperCase() == strName.toUpperCase()) return arrTemp[1];
+    }
+    return "";
+}
+alert(Request("a"));
+alert(Request("b"));
+alert(Request("c"));
+</code></pre>
+
+<pre><code>String.prototype.getQuery = function(name) {
+    var reg = new RegExp("(^|&amp;)" + name + "=([^&amp;]*)(&amp;|$)");
+    var r = this.substr(this.indexOf("?") + 1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
+var str = "www.xxx.com/index.html?a=1&amp;b=1&amp;c=测试测试";
+alert(str.getQuery("a"));
+alert(str.getQuery("b"));
+alert(str.getQuery("c"));
+</code></pre>
+
+<ul>
+<li>优点：取值方便.可以跨域</li>
+<li>缺点：值长度有限制</li>
+</ul>
+
+<h3 id="javascriptcookie">二：JavaScript静态页面值传递之Cookie篇</h3>
+
+<p>Cookie是浏览器存储少量命名数据.
+它与某个特定的网页或网站关联在一起.
+Cookie用来给浏览器提供内存,
+以便脚本和服务器程序可以在一个页面中使用另一个页面的输入数据.
+Post.html</p>
+
+<pre><code>&lt;input type="text" name="txt1"&gt;
+&lt;input type="button" value="Post"&gt;
+</code></pre>
+
+<pre><code>function setCookie(name, value) {
+    /*
+     *--------------- setCookie(name,value) -----------------
+     * setCookie(name,value)
+     * 功能:设置得变量name的值
+     * 参数:name,字符串;value,字符串.
+     * 实例:setCookie('username','baobao')
+     *--------------- setCookie(name,value) -----------------
+     */
+    var Days = 30; // 此 cookie 将被保存 30 天
+    　　
+    var exp　 = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    location.href = "Read.html"; //接收页面.
+}
+</code></pre>
+
+<p>Read.html</p>
+
+<pre><code>function getCookie(name) {
+    /*
+     *--------------- getCookie(name) -----------------
+     * getCookie(name)
+     * 功能:取得变量name的值
+     * 参数:name,字符串.
+     * 实例:alert(getCookie("baobao"));
+     *--------------- getCookie(name) -----------------
+     */
+    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+    if (arr != null) return unescape(arr[2]);
+    return null;
+}
+alert(getCookie("baobao"));
+</code></pre>
+
+<ul>
+<li>优点：可以在同源内的任意网页内访问.生命期可以设置</li>
+<li>缺点:：值长度有限制</li>
+</ul>
+
+<h3 id="javascriptwindowopen">三：JavaScript静态页面值传递之Window.open篇</h3>
+
+<p>这两窗口之间存在着关系.父窗口parent.html打开子窗口son.html
+子窗口可以通过window.opener指向父窗口.这样可以访问父窗口的对象.</p>
+
+<p>Post.html</p>
+
+<pre><code>&lt;input type="text" name="maintext"&gt;
+&lt;input type="button" value="Open"&gt;
+</code></pre>
+
+<p>Read.html</p>
+
+<pre><code>// window.open打开的窗口.
+// 利用opener指向父窗口.
+var parentText = window.opener.document.all.maintext.value;
+alert(parentText);
+</code></pre>
+
+<ul>
+<li>优点：取值方便.只要window.opener指向父窗口,就可以访问所有对象.不仅可以访问值,还可以访问父窗口的方法.值长度无限制</li>
+<li>缺点：两窗口要存在着关系.就是利用window.open打开的窗口.不能跨域</li>
+</ul>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
+	</div>
+</div>
+<script src="/main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}} by {{author}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "/main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "pages/jsval.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date, "author": post.author?post.author:"ZK"});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>

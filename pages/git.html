@@ -87,6 +87,14 @@ r/reword  修改提交信息    修改当前的提交信息
 s/squash  合并提交        合并多条（多行）提交信息为一条
 ```
 
+* 储藏当前的修改 stash
+```
+git stash
+git stash list
+git commit -m "提交新的修改"
+git stash pop 或 git stash apply
+```
+
 * 更新本地和远程同步（覆盖本地）
 
 1\. 第一种方法
@@ -440,6 +448,16 @@ git clone https://github.com/Gazler/cloneme
 根据命令提示修改信息，保存退出编辑器
 r/reword  修改提交信息    修改当前的提交信息
 s/squash  合并提交        合并多条（多行）提交信息为一条
+</code></pre>
+
+<ul>
+<li>储藏当前的修改 stash</li>
+</ul>
+
+<pre><code>git stash
+git stash list
+git commit -m "提交新的修改"
+git stash pop 或 git stash apply
 </code></pre>
 
 <ul>

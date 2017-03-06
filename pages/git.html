@@ -194,12 +194,88 @@ git rebase --skip
 
 - 在这种情况，Git会停止rebase并会让你去解决 冲突；在解决完冲突后，用`git-add`命令去更新这些内容的索引(index), 然后，你无需执行 `git-commit`只要执行:
 ```
-$ git rebase --continue
+git rebase --continue
 ```
 - 这样git会继续应用(apply)余下的补丁。
 在任何时候，你可以用`--abort`参数来终止rebase的行动，并且"mywork" 分支会回到rebase开始前的状态。
 ```
-$ git rebase --abort
+git rebase --abort
+```
+
+* 配置Git（`.gitconfig` 文件）
+
+Git命令自定义别名
+
+别名用来帮助你定义自己的git命令。比如你可以定义 `git a` 来运行 `git add --all`
+
+要添加一个别名， 一种方法是打开 `.gitconfig` 文件并添加如下内容：
+```
+[alias]
+  co = checkout
+  cm = commit
+  p = push
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+```
+...或者在命令行里键入：
+```
+git config --global alias.new_alias git_function
+```
+例如：
+```
+git config --global alias.cm commit
+```
+指向多个命令的别名可以用引号来定义：
+```
+git config --global alias.ac 'add -A . && commit'
+```
+下面列出了一些有用的别名：
+```
+git cm	git commit	git config --global alias.cm commit
+
+git co	git checkout	git config --global alias.co checkout
+
+git ac	git add . -A git commit	git config --global alias.ac '!git add -A && git commit'
+
+git st	git status -sb	git config --global alias.st 'status -sb'
+
+git tags	git tag -l	git config --global alias.tags 'tag -l'
+
+git branches	git branch -a	git config --global alias.branches 'branch -a'
+
+git remotes	git remote -v	git config --global alias.remotes 'remote -v'
+
+git lg    git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --	git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --"
+```
+
+自动更正
+
+如果键入 `git comit` 你会看到如下输出：
+```
+git comit -m "Message"
+# git: 'comit' is not a git command. See 'git --help'.
+
+# Did you mean this?
+#   commit
+```
+为了在键入 comit 调用 commit 命令，只需启用自动纠错功能：
+```
+git config --global help.autocorrect 1
+```
+现在你就会看到：
+```
+git comit -m "Message"
+# WARNING: You called a Git command named 'comit', which does not exist.
+# Continuing under the assumption that you meant 'commit'
+# in 0.1 seconds automatically...
+```
+带颜色输出
+
+要在你的Git命令输出里加上颜色的话，可以用如下命令：
+```
+git config --global color.ui 1
 ```
 
 ## Git-FTP
@@ -622,7 +698,7 @@ git rebase --abort
 <li>在这种情况，Git会停止rebase并会让你去解决 冲突；在解决完冲突后，用<code>git-add</code>命令去更新这些内容的索引(index), 然后，你无需执行 <code>git-commit</code>只要执行:</li>
 </ul>
 
-<pre><code>$ git rebase --continue
+<pre><code>git rebase --continue
 </code></pre>
 
 <ul>
@@ -630,7 +706,92 @@ git rebase --abort
 在任何时候，你可以用<code>--abort</code>参数来终止rebase的行动，并且"mywork" 分支会回到rebase开始前的状态。</li>
 </ul>
 
-<pre><code>$ git rebase --abort
+<pre><code>git rebase --abort
+</code></pre>
+
+<ul>
+<li>配置Git（<code>.gitconfig</code> 文件）</li>
+</ul>
+
+<p>Git命令自定义别名</p>
+
+<p>别名用来帮助你定义自己的git命令。比如你可以定义 <code>git a</code> 来运行 <code>git add --all</code></p>
+
+<p>要添加一个别名， 一种方法是打开 <code>.gitconfig</code> 文件并添加如下内容：</p>
+
+<pre><code>[alias]
+  co = checkout
+  cm = commit
+  p = push
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+</code></pre>
+
+<p>...或者在命令行里键入：</p>
+
+<pre><code>git config --global alias.new_alias git_function
+</code></pre>
+
+<p>例如：</p>
+
+<pre><code>git config --global alias.cm commit
+</code></pre>
+
+<p>指向多个命令的别名可以用引号来定义：</p>
+
+<pre><code>git config --global alias.ac 'add -A . &amp;&amp; commit'
+</code></pre>
+
+<p>下面列出了一些有用的别名：</p>
+
+<pre><code>git cm    git commit  git config --global alias.cm commit
+
+git co    git checkout    git config --global alias.co checkout
+
+git ac    git add . -A git commit git config --global alias.ac '!git add -A &amp;&amp; git commit'
+
+git st    git status -sb  git config --global alias.st 'status -sb'
+
+git tags    git tag -l  git config --global alias.tags 'tag -l'
+
+git branches    git branch -a   git config --global alias.branches 'branch -a'
+
+git remotes    git remote -v   git config --global alias.remotes 'remote -v'
+
+git lg    git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --    git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --"
+</code></pre>
+
+<p>自动更正</p>
+
+<p>如果键入 <code>git comit</code> 你会看到如下输出：</p>
+
+<pre><code>git comit -m "Message"
+# git: 'comit' is not a git command. See 'git --help'.
+
+# Did you mean this?
+#   commit
+</code></pre>
+
+<p>为了在键入 comit 调用 commit 命令，只需启用自动纠错功能：</p>
+
+<pre><code>git config --global help.autocorrect 1
+</code></pre>
+
+<p>现在你就会看到：</p>
+
+<pre><code>git comit -m "Message"
+# WARNING: You called a Git command named 'comit', which does not exist.
+# Continuing under the assumption that you meant 'commit'
+# in 0.1 seconds automatically...
+</code></pre>
+
+<p>带颜色输出</p>
+
+<p>要在你的Git命令输出里加上颜色的话，可以用如下命令：</p>
+
+<pre><code>git config --global color.ui 1
 </code></pre>
 
 <h2 id="gitftp">Git-FTP</h2>

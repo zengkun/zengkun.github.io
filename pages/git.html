@@ -76,6 +76,17 @@ git mv oldfilename newfilename
 * 单行查看log列表
 ``` bash
 git log --pretty=oneline
+
+指定log格式  hash + msg + n days ago
+
+git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --date=relative
+```
+
+* 查找最近的一条提交信息，并显示改动文件详情对比
+
+query（区别大小写）：查询的关键词
+``` bash
+git show :/query
 ```
 
 * 修改提交信息、合并多次提交为一次记录
@@ -437,6 +448,19 @@ git clone https://github.com/Gazler/cloneme
 </ul>
 
 <pre><code class=" bash">git log --pretty=oneline
+
+指定log格式  hash + msg + n days ago
+
+git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit --date=relative
+</code></pre>
+
+<ul>
+<li>查找最近的一条提交信息，并显示改动文件详情对比</li>
+</ul>
+
+<p>query（区别大小写）：查询的关键词</p>
+
+<pre><code class=" bash">git show :/query
 </code></pre>
 
 <ul>

@@ -101,6 +101,21 @@ $ git branch --no-merged
 ```
 会显示所有还没有合并到你当前分支的分支列表
 
+
+* 使用 --allow-empty 选项强制创建一个没有任何改动的提交
+``` bash
+$ git commit -m "Big-ass commit" --allow-empty
+```
+这样做在如下几种情况下是有意义的：
+
+标记一批工作或一个新功能的开始。
+记录你对项目进行了跟代码无关的改动。
+跟使用你仓库的其他人交流。
+作为仓库的第一次提交，因为第一次提交日后是不能被`rebase`的： 
+``` bash
+git commit -m "init repo" --allow-empty
+```
+
 * 修改提交信息、合并多次提交为一次记录
 ``` bash
 git rebase -i HEAD  （HEAD^/HEAD^^/...   或者某一次提交前一次的hash值）
@@ -490,6 +505,23 @@ git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C
 </code></pre>
 
 <p>会显示所有还没有合并到你当前分支的分支列表</p>
+
+<ul>
+<li>使用 --allow-empty 选项强制创建一个没有任何改动的提交</li>
+</ul>
+
+<pre><code class=" bash">$ git commit -m "Big-ass commit" --allow-empty
+</code></pre>
+
+<p>这样做在如下几种情况下是有意义的：</p>
+
+<p>标记一批工作或一个新功能的开始。
+记录你对项目进行了跟代码无关的改动。
+跟使用你仓库的其他人交流。
+作为仓库的第一次提交，因为第一次提交日后是不能被<code>rebase</code>的： </p>
+
+<pre><code class=" bash">git commit -m "init repo" --allow-empty
+</code></pre>
 
 <ul>
 <li>修改提交信息、合并多次提交为一次记录</li>

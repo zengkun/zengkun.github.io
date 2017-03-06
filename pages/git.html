@@ -89,6 +89,18 @@ query（区别大小写）：查询的关键词
 git show :/query
 ```
 
+* 查看分支合并
+``` bash
+$ git branch --merged
+```
+显示所有已经合并到你当前分支的分支列表
+
+相反地：
+``` bash
+$ git branch --no-merged
+```
+会显示所有还没有合并到你当前分支的分支列表
+
 * 修改提交信息、合并多次提交为一次记录
 ``` bash
 git rebase -i HEAD  （HEAD^/HEAD^^/...   或者某一次提交前一次的hash值）
@@ -462,6 +474,22 @@ git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C
 
 <pre><code class=" bash">git show :/query
 </code></pre>
+
+<ul>
+<li>查看分支合并</li>
+</ul>
+
+<pre><code class=" bash">$ git branch --merged
+</code></pre>
+
+<p>显示所有已经合并到你当前分支的分支列表</p>
+
+<p>相反地：</p>
+
+<pre><code class=" bash">$ git branch --no-merged
+</code></pre>
+
+<p>会显示所有还没有合并到你当前分支的分支列表</p>
 
 <ul>
 <li>修改提交信息、合并多次提交为一次记录</li>

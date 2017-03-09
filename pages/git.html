@@ -57,6 +57,73 @@ git config --global http.sslVerify false
 ``` 
 
 #### 常用命令记录
+
+
+* 新建文件夹
+```
+mkdir filename
+```
+
+* 新建文件
+```
+touch filename
+```
+
+* 查看当前目录所在路径
+```
+pwd
+```
+
+* 查看文件状态
+```
+git status
+```
+
+* 添加文件到暂存区
+```
+git add filename(s)多个文件空格隔开
+```
+
+* 添加加当前目录下所有修改或者新添加文件到暂存区
+```
+git add .
+```
+
+* 撤销添加到暂存区的文件
+```
+撤销全部
+git reset HEAD
+
+撤销(目录下)单个或多个(多个文件空格隔开)
+git reset HEAD dir/filename(s)
+```
+
+* 从远程获取最新版本到本地，使用如下命令可以在本地新建一个temp分支，并将远程origin仓库的master分支代码下载到本地temp分支
+```
+git fetch origin master:temp
+```
+
+* 比较本地仓库与下载的temp分支，比较本地代码与刚刚从远程下载下来的代码的区别：
+```
+git diff temp
+```
+
+* 合并temp分支到本地的master分支,对比区别之后，如果觉得没有问题，可以使用如下命令进行代码合并
+```
+git merge temp
+```
+
+* 提交
+```
+git commit -m "msg"
+```
+
+* 将暂存区的文件同步到远程仓库，这一步第一次会弹出一个github的登录页登录就行	
+```
+git push
+```
+
+
 * 创建分支
 ``` bash
 git branch
@@ -517,6 +584,94 @@ git clone https://github.com/Gazler/cloneme
 </code></pre>
 
 <h4 id="">常用命令记录</h4>
+
+<ul>
+<li>新建文件夹</li>
+</ul>
+
+<pre><code>mkdir filename
+</code></pre>
+
+<ul>
+<li>新建文件</li>
+</ul>
+
+<pre><code>touch filename
+</code></pre>
+
+<ul>
+<li>查看当前目录所在路径</li>
+</ul>
+
+<pre><code>pwd
+</code></pre>
+
+<ul>
+<li>查看文件状态</li>
+</ul>
+
+<pre><code>git status
+</code></pre>
+
+<ul>
+<li>添加文件到暂存区</li>
+</ul>
+
+<pre><code>git add filename(s)多个文件空格隔开
+</code></pre>
+
+<ul>
+<li>添加加当前目录下所有修改或者新添加文件到暂存区</li>
+</ul>
+
+<pre><code>git add .
+</code></pre>
+
+<ul>
+<li>撤销添加到暂存区的文件</li>
+</ul>
+
+<pre><code>撤销全部
+git reset HEAD
+
+撤销(目录下)单个或多个(多个文件空格隔开)
+git reset HEAD dir/filename(s)
+</code></pre>
+
+<ul>
+<li>从远程获取最新版本到本地，使用如下命令可以在本地新建一个temp分支，并将远程origin仓库的master分支代码下载到本地temp分支</li>
+</ul>
+
+<pre><code>git fetch origin master:temp
+</code></pre>
+
+<ul>
+<li>比较本地仓库与下载的temp分支，比较本地代码与刚刚从远程下载下来的代码的区别：</li>
+</ul>
+
+<pre><code>git diff temp
+</code></pre>
+
+<ul>
+<li>合并temp分支到本地的master分支,对比区别之后，如果觉得没有问题，可以使用如下命令进行代码合并</li>
+</ul>
+
+<pre><code>git merge temp
+</code></pre>
+
+<ul>
+<li>提交</li>
+</ul>
+
+<pre><code>git commit -m "msg"
+</code></pre>
+
+<ul>
+<li>将暂存区的文件同步到远程仓库，这一步第一次会弹出一个github的登录页登录就行    </li>
+</ul>
+
+<pre><code>git push
+</code></pre>
 
 <ul>
 <li>创建分支</li>

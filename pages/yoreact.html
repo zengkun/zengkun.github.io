@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>学习笔记</title>
+    <link rel="shortcut icon" href="/favicon.jpg"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+## 一、安装脚手架
+
+首先确保自己安装了nodejs，然后全局安装yeoman
+```
+npm install -g yo
+```
+
+然后直接安装脚手架
+```
+npm install -g generator-reactpackage
+```
+
+## 二、创建React项目
+
+在合适的地方新建一个文件夹，在文件夹下运行：
+```
+yo reactpackage
+```
+
+然后就会在此目录下生成以下目录结构：
+```
+├── data
+│ └── test.json
+├── src
+│ ├── components
+│ │ └── App.js
+│ ├── images
+│ │ └── yeoman.png
+│ ├── styles
+│ │ └── app.scss
+│ ├── vendor
+│ │ └── jquery.js
+│ ├── views
+│ │ └── home.html
+├── node_modules
+├── index.html
+├── package.json
+└── webpack.config.js
+```
+
+## 三、调试打包React项目
+
+然后使用以下命令：
+```
+npm run dev // 项目开发过程使用，启动服务，实时刷新
+npm run build // 开发完成之后打包文件（js、css分开打包）
+```
+
+## 四、测试预览项目
+
+本项目默认监听端口是`8888`，所以在浏览器输入 `http://localhost:8888`，或者`index.html`->`右键打开方式->chrome` 就能看到效果了
+如果执行上述命令提示错误：`Error: getaddrinfo ENOTFOUND localhost`，在`host`文件里面添加`127.0.0.1 localhost`即可
+监听端口和实时刷新的功能都能在`webpack.config.js`文件中修改配置
+
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<h2 id="">一、安装脚手架</h2>
+
+<p>首先确保自己安装了nodejs，然后全局安装yeoman</p>
+
+<pre><code>npm install -g yo
+</code></pre>
+
+<p>然后直接安装脚手架</p>
+
+<pre><code>npm install -g generator-reactpackage
+</code></pre>
+
+<h2 id="react">二、创建React项目</h2>
+
+<p>在合适的地方新建一个文件夹，在文件夹下运行：</p>
+
+<pre><code>yo reactpackage
+</code></pre>
+
+<p>然后就会在此目录下生成以下目录结构：</p>
+
+<pre><code>├── data
+│ └── test.json
+├── src
+│ ├── components
+│ │ └── App.js
+│ ├── images
+│ │ └── yeoman.png
+│ ├── styles
+│ │ └── app.scss
+│ ├── vendor
+│ │ └── jquery.js
+│ ├── views
+│ │ └── home.html
+├── node_modules
+├── index.html
+├── package.json
+└── webpack.config.js
+</code></pre>
+
+<h2 id="react">三、调试打包React项目</h2>
+
+<p>然后使用以下命令：</p>
+
+<pre><code>npm run dev // 项目开发过程使用，启动服务，实时刷新
+npm run build // 开发完成之后打包文件（js、css分开打包）
+</code></pre>
+
+<h2 id="">四、测试预览项目</h2>
+
+<p>本项目默认监听端口是<code>8888</code>，所以在浏览器输入 <code>http://localhost:8888</code>，或者<code>index.html</code>-&gt;<code>右键打开方式-&gt;chrome</code> 就能看到效果了
+如果执行上述命令提示错误：<code>Error: getaddrinfo ENOTFOUND localhost</code>，在<code>host</code>文件里面添加<code>127.0.0.1 localhost</code>即可
+监听端口和实时刷新的功能都能在<code>webpack.config.js</code>文件中修改配置</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
+	</div>
+</div>
+<script src="/main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}} by {{author}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "/main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "pages/yoreact.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date, "author": post.author?post.author:"ZK"});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>

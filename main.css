@@ -814,6 +814,7 @@ a:hover {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    display:block;
 }
 
 .title a:hover {

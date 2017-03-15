@@ -808,15 +808,6 @@ a:hover {
     margin: 0 0 0 110px
 }
 
-
-.title a {
-    word-wrap: normal;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    display:block;
-}
-
 .title a:hover {
     padding-bottom: 2px;
     border-bottom: 1px solid #E93071
@@ -826,6 +817,10 @@ a:hover {
     font-size: 14px;
     line-height: 25px;
     margin: 5px 0;
+    word-wrap: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .footer {

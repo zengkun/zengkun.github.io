@@ -821,6 +821,7 @@ a:hover {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    color: #E93071;
 }
 
 .footer {

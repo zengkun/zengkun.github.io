@@ -1,159 +1,111 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="Keywords" content="blog"/>
-    <meta name="Description" content="blog"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="blog" />
+    <meta name="Description" content="blog" />
     <title>学习笔记</title>
-    <link rel="shortcut icon" href="/favicon.jpg"/>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
 </head>
+
 <body>
-<div class="main">
-    <div class="header">
-    	<ul id="pages">
-            <li><a href="/">home</a></li>
-            <li><a href="/#/tags">tags</a></li>
-            <li><a href="/#/archive">archive</a></li>
-    	</ul>
+    <div class="main">
+        <div class="header">
+            <ul id="pages">
+                <li><a href="/">home</a></li>
+                <li><a href="/#/tags">tags</a></li>
+                <li><a href="/#/archive">archive</a></li>
+            </ul>
+        </div>
+        <div class="wrap-header">
+            <h1>
+                <a href="/" id="title"></a>
+            </h1>
+        </div>
+        <div id="md" style="display: none;">
+            <!-- markdown -->
+            //markdown//
+            <!-- markdown end -->
+        </div>
+        <div class="entry" id="main">
+            <!-- content -->
+            //content//
+            <!-- content end -->
+        </div>
+        <br>
+        <br>
+        <div id="disqus_thread"></div>
+        <div class="footer">
+            <p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
+        </div>
     </div>
-	<div class="wrap-header">
-	<h1>
-    <a href="/" id="title"></a>
-	</h1>
-	</div>
-<div id="md" style="display: none;">
-<!-- markdown -->
-Localtunnel可以方便快捷的实现你的本地web服务通过外网访问，无需修改DNS和防火墙设置，其实现原理与ngrok类似，这里不细说，感兴趣的可以访问这里阅读源代码了解其原理。
-
-## 安装node.js和npm
-localtunnel是基于node.js的一个模块，所以首先需要安装node.js和npm，[安装过程可参考：Node.js 笔记（一） nodejs、npm、express安装](http://blog.csdn.net/haidaochen/article/details/7257655)
-
-## 安装localtunnel
-进入命令行输入如下命名，完成localtunnel的安装
-```
-npm install -g localtunnel  
-```
-
-## 使用localtunnel
-开启web服务器后（例如`http://localhost:8080`），在命令行中输入如下命令即可获取到一个随机的url，例如`https://gqgh.localtunnel.me`,通过此域名即可访问到你的本地server
-```
-lt --port 8080 或 lt -p 8080  
-``` 
-
-如果想通过固定的域名访问，则可以通过以下命令进行设置，成功后可通过`https://klioen.localtunnel.me`而访问到本地服务器。
-```
-lt --subdomain klioen --port 8080 或 lt -s klioen -p 8080  
-```
-
-## 参考网站：
-localtunnel.me <http://localtunnel.me>
-
-localtunnel <https://github.com/localtunnel/localtunnel>
-
-<!-- markdown end -->
-</div>
-<div class="entry" id="main">
-<!-- content -->
-<p>Localtunnel可以方便快捷的实现你的本地web服务通过外网访问，无需修改DNS和防火墙设置，其实现原理与ngrok类似，这里不细说，感兴趣的可以访问这里阅读源代码了解其原理。</p>
-
-<h2 id="nodejsnpm">安装node.js和npm</h2>
-
-<p>localtunnel是基于node.js的一个模块，所以首先需要安装node.js和npm，<a href="http://blog.csdn.net/haidaochen/article/details/7257655">安装过程可参考：Node.js 笔记（一） nodejs、npm、express安装</a></p>
-
-<h2 id="localtunnel">安装localtunnel</h2>
-
-<p>进入命令行输入如下命名，完成localtunnel的安装</p>
-
-<pre><code>npm install -g localtunnel  
-</code></pre>
-
-<h2 id="localtunnel">使用localtunnel</h2>
-
-<p>开启web服务器后（例如<code>http://localhost:8080</code>），在命令行中输入如下命令即可获取到一个随机的url，例如<code>https://gqgh.localtunnel.me</code>,通过此域名即可访问到你的本地server</p>
-
-<pre><code>lt --port 8080 或 lt -p 8080  
-</code></pre>
-
-<p>如果想通过固定的域名访问，则可以通过以下命令进行设置，成功后可通过<code>https://klioen.localtunnel.me</code>而访问到本地服务器。</p>
-
-<pre><code>lt --subdomain klioen --port 8080 或 lt -s klioen -p 8080  
-</code></pre>
-
-<h2 id="">参考网站：</h2>
-
-<p>localtunnel.me <a href="http://localtunnel.me">http://localtunnel.me</a></p>
-
-<p>localtunnel <a href="https://github.com/localtunnel/localtunnel">https://github.com/localtunnel/localtunnel</a></p>
-<!-- content end -->
-</div>
-<br>
-<br>
-    <div id="disqus_thread"></div>
-	<div class="footer">
-		<p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
-	</div>
-</div>
-<script src="/main.js"></script>
-<script id="content" type="text/mustache">
-    <h1>{{title}}</h1>
-    <div class="tag">
-    {{date}} by {{author}}
-    {{#tags}}
-    <a href="/#/tag/{{name}}">#{{name}}</a>
-    {{/tags}}
-    </div>
-</script>
-<script id="pagesTemplate" type="text/mustache">
-    {{#pages}}
-    <li>
-        <a href="{{path}}">{{title}}</a>
-    </li>
-    {{/pages}}
-</script>
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: "/main.json",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $("#title").html(data.name);
-            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
-            var pagesHtml = pagesTemplate.render({"pages": data.pages});
-            $("#pages").append(pagesHtml);
-            //path
-            var path = "pages/localtunnel.html";
-            //path end
-            var now = 0;
-            for (var i = 0; i < data.posts.length; ++i)
-                if (path == data.posts[i].path)
-                    now = i;
-            var post = data.posts[now];
-            var tmp = post.tags.split(" ");
-            var tags = [];
-            for (var i = 0; i < tmp.length; ++i)
-                if (tmp[i].length > 0)
-                    tags.push({"name": tmp[i]});
-            var contentTemplate = Hogan.compile($("#content").html());
-            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date, "author": post.author?post.author:"ZK"});
-            $("#main").prepend(contentHtml);
-            if (data.disqus_shortname.length > 0) {
-                var disqus_shortname = data.disqus_shortname;
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
+    <script src="/main.js"></script>
+    <script id="content" type="text/mustache">
+        <h1>{{title}}</h1>
+        <div class="tag">
+            {{date}} by {{author}} {{#tags}}
+            <a href="/#/tag/{{name}}">#{{name}}</a> {{/tags}}
+        </div>
+    </script>
+    <script id="pagesTemplate" type="text/mustache">
+        {{#pages}}
+        <li>
+            <a href="{{path}}">{{title}}</a>
+        </li>
+        {{/pages}}
+    </script>
+    <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "/main.json",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                $("#title").html(data.name);
+                var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+                var pagesHtml = pagesTemplate.render({
+                    "pages": data.pages
+                });
+                $("#pages").append(pagesHtml);
+                //path
+                var path = "pages/localtunnel.html";
+                //path end
+                var now = 0;
+                for (var i = 0; i < data.posts.length; ++i)
+                    if (path == data.posts[i].path)
+                        now = i;
+                var post = data.posts[now];
+                var tmp = post.tags.split(" ");
+                var tags = [];
+                for (var i = 0; i < tmp.length; ++i)
+                    if (tmp[i].length > 0)
+                        tags.push({
+                            "name": tmp[i]
+                        });
+                var contentTemplate = Hogan.compile($("#content").html());
+                var contentHtml = contentTemplate.render({
+                    "title": post.title,
+                    "tags": tags,
+                    "date": post.date,
+                    "author": post.author ? post.author : data.name
+                });
+                $("#main").prepend(contentHtml);
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = 'http://static.duoshuo.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             }
-        }
+        });
     });
-});
-</script>
-<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
+    </script>
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+    </script>
 </body>
+
 </html>

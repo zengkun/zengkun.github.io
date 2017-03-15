@@ -13,7 +13,7 @@
   if (typeof exports !== 'undefined') {
       XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
       _ = require('underscore');
-      Base64 = require('./lib/base64.js');
+      Base64 = require('./js/lib/base64.js');
   }else{
       _ = window._;
       Base64 = window.Base64;

@@ -1,41 +1,46 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="Keywords" content="blog"/>
-    <meta name="Description" content="blog"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="blog" />
+    <meta name="Description" content="blog" />
     <title>学习笔记</title>
-    <link rel="shortcut icon" href="/favicon.jpg"/>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
 </head>
+
 <body>
-<div class="main">
-    <div class="header">
-    	<ul id="pages">
-            <li><a href="/">home</a></li>
-            <li><a href="/#/tags">tags</a></li>
-            <li><a href="/#/archive">archive</a></li>
-    	</ul>
-    </div>
-	<div class="wrap-header">
-	<h1>
-    <a href="/" id="title"></a>
-	</h1>
-	</div>
-<div id="md" style="display: none;">
+    <div class="main">
+        <div class="header">
+            <ul id="pages">
+                <li><a href="/">home</a></li>
+                <li><a href="/#/tags">tags</a></li>
+                <li><a href="/#/archive">archive</a></li>
+            </ul>
+        </div>
+        <div class="wrap-header">
+            <h1>
+                <a href="/" id="title"></a>
+            </h1>
+        </div>
+        <div id="md" style="display: none;">
+        <!-- 不能有缩进 -->
 <!-- markdown -->
 ### **一：JavaScript静态页面值传递之URL篇**
 
 能过URL进行传值.把要传递的信息接在URL上.
 
 Post.html
-```
+
+~~~~{html}
 <input type="text" name="username">
 <input type="text" name="sex">
 <input type="button" value="Post">
-```
-```
+~~~~
+
+~~~~{javascript}
 function Post() {
 	// 单个值 Read.html?username=baobao;
 	// 多全值 Read.html?username=baobao&sex=male;
@@ -44,10 +49,11 @@ function Post() {
 	url += "&sex=" + escape(document.all.sex.value);
 	location.href = url;
 }
-```
+~~~~
 
 Read.html
-```
+
+~~~~{html}
 /*
  *--------------- Read.html -----------------
  * Request[key]
@@ -56,8 +62,9 @@ Read.html
  * 实例:alert(Request["AAA"])
  *--------------- Request.html -----------------
  */
-```
-```
+~~~~~
+
+~~~~{javascript}
 var url = location.search;
 var Request = new Object();
 if (url.indexOf("?") != -1) {
@@ -69,8 +76,9 @@ if (url.indexOf("?") != -1) {
 }
 alert(Request["username"])
 alert(Request["sex"])
-```
-```
+~~~~
+
+~~~~{javascript}
 function Request(strName) {
 	var strHref = "www.xxx.com/index.html?a=1&b=1&c=测试测试";
 	var intPos = strHref.indexOf("?");
@@ -85,8 +93,9 @@ function Request(strName) {
 alert(Request("a"));
 alert(Request("b"));
 alert(Request("c"));
-```
-```
+~~~~
+
+~~~~{javascript}
 String.prototype.getQuery = function(name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 	var r = this.substr(this.indexOf("?") + 1).match(reg);
@@ -97,7 +106,8 @@ var str = "www.xxx.com/index.html?a=1&b=1&c=测试测试";
 alert(str.getQuery("a"));
 alert(str.getQuery("b"));
 alert(str.getQuery("c"));
-```
+~~~~
+
 * 优点：取值方便.可以跨域
 * 缺点：值长度有限制
 
@@ -109,11 +119,12 @@ Cookie用来给浏览器提供内存,
 以便脚本和服务器程序可以在一个页面中使用另一个页面的输入数据.
 Post.html
 
-```
+~~~~{html}
 <input type="text" name="txt1">
 <input type="button" value="Post">
-```
-```
+~~~~
+
+~~~~{javascript}
 function setCookie(name, value) {
 	/*
 	 *--------------- setCookie(name,value) -----------------
@@ -130,10 +141,11 @@ function setCookie(name, value) {
 	document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
 	location.href = "Read.html"; //接收页面.
 }
-```
+~~~~
+
 Read.html
 
-```
+~~~~{javascript}
 function getCookie(name) {
 	/*
 	 *--------------- getCookie(name) -----------------
@@ -148,7 +160,8 @@ function getCookie(name) {
 	return null;
 }
 alert(getCookie("baobao"));
-```
+~~~~
+
 * 优点：可以在同源内的任意网页内访问.生命期可以设置
 * 缺点:：值长度有限制
 
@@ -158,23 +171,26 @@ alert(getCookie("baobao"));
 
 Post.html
 
-```
+~~~~{html}
 <input type="text" name="maintext">
 <input type="button" value="Open">
-```
+~~~~
+
 Read.html
 
-```
+~~~~{javascript}
 // window.open打开的窗口.
 // 利用opener指向父窗口.
 var parentText = window.opener.document.all.maintext.value;
 alert(parentText);
-```
+~~~~
+
 * 优点：取值方便.只要window.opener指向父窗口,就可以访问所有对象.不仅可以访问值,还可以访问父窗口的方法.值长度无限制
 * 缺点：两窗口要存在着关系.就是利用window.open打开的窗口.不能跨域
 <!-- markdown end -->
-</div>
-<div class="entry" id="main">
+        </div>
+        <div class="entry" id="main">
+        <!-- 不能有缩进 -->
 <!-- content -->
 <h3 id="javascripturl"><strong>一：JavaScript静态页面值传递之URL篇</strong></h3>
 
@@ -182,24 +198,24 @@ alert(parentText);
 
 <p>Post.html</p>
 
-<pre><code>&lt;input type="text" name="username"&gt;
+<pre><code class="language-html">&lt;input type="text" name="username"&gt;
 &lt;input type="text" name="sex"&gt;
 &lt;input type="button" value="Post"&gt;
 </code></pre>
 
-<pre><code>function Post() {
-    // 单个值 Read.html?username=baobao;
-    // 多全值 Read.html?username=baobao&amp;sex=male;
-    　　
-    url = "Read.html?username=" + escape(document.all.username.value);
-    url += "&amp;sex=" + escape(document.all.sex.value);
-    location.href = url;
-}
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">Post<span class="token punctuation">(</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment" spellcheck="true"> // 单个值 Read.html?username=baobao;
+</span>   <span class="token comment" spellcheck="true"> // 多全值 Read.html?username=baobao&amp;sex=male;
+</span>    　　
+    url <span class="token operator">=</span> <span class="token string">"Read.html?username="</span> <span class="token operator">+</span> <span class="token function">escape<span class="token punctuation">(</span></span>document<span class="token punctuation">.</span>all<span class="token punctuation">.</span>username<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    url <span class="token operator">+</span><span class="token operator">=</span> <span class="token string">"&amp;sex="</span> <span class="token operator">+</span> <span class="token function">escape<span class="token punctuation">(</span></span>document<span class="token punctuation">.</span>all<span class="token punctuation">.</span>sex<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    location<span class="token punctuation">.</span>href <span class="token operator">=</span> url<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 
 <p>Read.html</p>
 
-<pre><code>/*
+<pre><code class="language-html">/*
  *--------------- Read.html -----------------
  * Request[key]
  * 功能:实现ASP的取得URL字符串,Request("AAA")
@@ -207,47 +223,47 @@ alert(parentText);
  * 实例:alert(Request["AAA"])
  *--------------- Request.html -----------------
  */
+~</code></pre>
+
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">var</span> url <span class="token operator">=</span> location<span class="token punctuation">.</span>search<span class="token punctuation">;</span>
+<span class="token keyword">var</span> Request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>url<span class="token punctuation">.</span><span class="token function">indexOf<span class="token punctuation">(</span></span><span class="token string">"?"</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> str <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">substr<span class="token punctuation">(</span></span><span class="token number">1</span><span class="token punctuation">)</span>　<span class="token comment" spellcheck="true"> // 去掉?号
+</span>        　　 strs <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split<span class="token punctuation">(</span></span><span class="token string">"&amp;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> strs<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>　
+        Request<span class="token punctuation">[</span>strs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">split<span class="token punctuation">(</span></span><span class="token string">"="</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">unescape<span class="token punctuation">(</span></span>strs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">split<span class="token punctuation">(</span></span><span class="token string">"="</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token function">alert<span class="token punctuation">(</span></span>Request<span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token function">alert<span class="token punctuation">(</span></span>Request<span class="token punctuation">[</span><span class="token string">"sex"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 </code></pre>
 
-<pre><code>var url = location.search;
-var Request = new Object();
-if (url.indexOf("?") != -1) {
-    var str = url.substr(1)　 // 去掉?号
-        　　 strs = str.split("&amp;");
-    for (var i = 0; i &lt; strs.length; i++) {　
-        Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-    }
-}
-alert(Request["username"])
-alert(Request["sex"])
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">Request<span class="token punctuation">(</span></span>strName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> strHref <span class="token operator">=</span> <span class="token string">"www.xxx.com/index.html?a=1&amp;b=1&amp;c=测试测试"</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> intPos <span class="token operator">=</span> strHref<span class="token punctuation">.</span><span class="token function">indexOf<span class="token punctuation">(</span></span><span class="token string">"?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> strRight <span class="token operator">=</span> strHref<span class="token punctuation">.</span><span class="token function">substr<span class="token punctuation">(</span></span>intPos <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> arrTmp <span class="token operator">=</span> strRight<span class="token punctuation">.</span><span class="token function">split<span class="token punctuation">(</span></span><span class="token string">"&amp;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arrTmp<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> arrTemp <span class="token operator">=</span> arrTmp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">split<span class="token punctuation">(</span></span><span class="token string">"="</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>arrTemp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toUpperCase<span class="token punctuation">(</span></span><span class="token punctuation">)</span> <span class="token operator">==</span> strName<span class="token punctuation">.</span><span class="token function">toUpperCase<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> arrTemp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">alert<span class="token punctuation">(</span></span><span class="token function">Request<span class="token punctuation">(</span></span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert<span class="token punctuation">(</span></span><span class="token function">Request<span class="token punctuation">(</span></span><span class="token string">"b"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert<span class="token punctuation">(</span></span><span class="token function">Request<span class="token punctuation">(</span></span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 
-<pre><code>function Request(strName) {
-    var strHref = "www.xxx.com/index.html?a=1&amp;b=1&amp;c=测试测试";
-    var intPos = strHref.indexOf("?");
-    var strRight = strHref.substr(intPos + 1);
-    var arrTmp = strRight.split("&amp;");
-    for (var i = 0; i &lt; arrTmp.length; i++) {
-        var arrTemp = arrTmp[i].split("=");
-        if (arrTemp[0].toUpperCase() == strName.toUpperCase()) return arrTemp[1];
-    }
-    return "";
-}
-alert(Request("a"));
-alert(Request("b"));
-alert(Request("c"));
-</code></pre>
-
-<pre><code>String.prototype.getQuery = function(name) {
-    var reg = new RegExp("(^|&amp;)" + name + "=([^&amp;]*)(&amp;|$)");
-    var r = this.substr(this.indexOf("?") + 1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-}
-var str = "www.xxx.com/index.html?a=1&amp;b=1&amp;c=测试测试";
-alert(str.getQuery("a"));
-alert(str.getQuery("b"));
-alert(str.getQuery("c"));
+<pre class=" language-javascript"><code class=" language-javascript">String<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>getQuery <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> reg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span><span class="token string">"(^|&amp;)"</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">"=([^&amp;]*)(&amp;|$)"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> r <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">substr<span class="token punctuation">(</span></span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">indexOf<span class="token punctuation">(</span></span><span class="token string">"?"</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">match<span class="token punctuation">(</span></span>reg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>r <span class="token operator">!</span><span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">unescape<span class="token punctuation">(</span></span>r<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">"www.xxx.com/index.html?a=1&amp;b=1&amp;c=测试测试"</span><span class="token punctuation">;</span>
+<span class="token function">alert<span class="token punctuation">(</span></span>str<span class="token punctuation">.</span><span class="token function">getQuery<span class="token punctuation">(</span></span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert<span class="token punctuation">(</span></span>str<span class="token punctuation">.</span><span class="token function">getQuery<span class="token punctuation">(</span></span><span class="token string">"b"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">alert<span class="token punctuation">(</span></span>str<span class="token punctuation">.</span><span class="token function">getQuery<span class="token punctuation">(</span></span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 
 <ul>
@@ -263,44 +279,44 @@ Cookie用来给浏览器提供内存,
 以便脚本和服务器程序可以在一个页面中使用另一个页面的输入数据.
 Post.html</p>
 
-<pre><code>&lt;input type="text" name="txt1"&gt;
+<pre><code class="language-html">&lt;input type="text" name="txt1"&gt;
 &lt;input type="button" value="Post"&gt;
 </code></pre>
 
-<pre><code>function setCookie(name, value) {
-    /*
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">setCookie<span class="token punctuation">(</span></span>name<span class="token punctuation">,</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/*
      *--------------- setCookie(name,value) -----------------
      * setCookie(name,value)
      * 功能:设置得变量name的值
      * 参数:name,字符串;value,字符串.
      * 实例:setCookie('username','baobao')
      *--------------- setCookie(name,value) -----------------
-     */
-    var Days = 30; // 此 cookie 将被保存 30 天
-    　　
-    var exp　 = new Date();
-    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-    location.href = "Read.html"; //接收页面.
-}
+     */</span>
+    <span class="token keyword">var</span> Days <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 此 cookie 将被保存 30 天
+</span>    　　
+    <span class="token keyword">var</span> exp　 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    exp<span class="token punctuation">.</span><span class="token function">setTime<span class="token punctuation">(</span></span>exp<span class="token punctuation">.</span><span class="token function">getTime<span class="token punctuation">(</span></span><span class="token punctuation">)</span> <span class="token operator">+</span> Days <span class="token operator">*</span> <span class="token number">24</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    document<span class="token punctuation">.</span>cookie <span class="token operator">=</span> name <span class="token operator">+</span> <span class="token string">"="</span> <span class="token operator">+</span> <span class="token function">escape<span class="token punctuation">(</span></span>value<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">";expires="</span> <span class="token operator">+</span> exp<span class="token punctuation">.</span><span class="token function">toGMTString<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    location<span class="token punctuation">.</span>href <span class="token operator">=</span> <span class="token string">"Read.html"</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> //接收页面.
+</span><span class="token punctuation">}</span>
 </code></pre>
 
 <p>Read.html</p>
 
-<pre><code>function getCookie(name) {
-    /*
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">function</span> <span class="token function">getCookie<span class="token punctuation">(</span></span>name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/*
      *--------------- getCookie(name) -----------------
      * getCookie(name)
      * 功能:取得变量name的值
      * 参数:name,字符串.
      * 实例:alert(getCookie("baobao"));
      *--------------- getCookie(name) -----------------
-     */
-    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
-    if (arr != null) return unescape(arr[2]);
-    return null;
-}
-alert(getCookie("baobao"));
+     */</span>
+    <span class="token keyword">var</span> arr <span class="token operator">=</span> document<span class="token punctuation">.</span>cookie<span class="token punctuation">.</span><span class="token function">match<span class="token punctuation">(</span></span><span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span><span class="token string">"(^| )"</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">"=([^;]*)(;|$)"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>arr <span class="token operator">!</span><span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">unescape<span class="token punctuation">(</span></span>arr<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">alert<span class="token punctuation">(</span></span><span class="token function">getCookie<span class="token punctuation">(</span></span><span class="token string">"baobao"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 
 <ul>
@@ -315,16 +331,16 @@ alert(getCookie("baobao"));
 
 <p>Post.html</p>
 
-<pre><code>&lt;input type="text" name="maintext"&gt;
+<pre><code class="language-html">&lt;input type="text" name="maintext"&gt;
 &lt;input type="button" value="Open"&gt;
 </code></pre>
 
 <p>Read.html</p>
 
-<pre><code>// window.open打开的窗口.
-// 利用opener指向父窗口.
-var parentText = window.opener.document.all.maintext.value;
-alert(parentText);
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token comment" spellcheck="true">// window.open打开的窗口.
+</span><span class="token comment" spellcheck="true">// 利用opener指向父窗口.
+</span><span class="token keyword">var</span> parentText <span class="token operator">=</span> window<span class="token punctuation">.</span>opener<span class="token punctuation">.</span>document<span class="token punctuation">.</span>all<span class="token punctuation">.</span>maintext<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+<span class="token function">alert<span class="token punctuation">(</span></span>parentText<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 
 <ul>
@@ -332,73 +348,73 @@ alert(parentText);
 <li>缺点：两窗口要存在着关系.就是利用window.open打开的窗口.不能跨域</li>
 </ul>
 <!-- content end -->
-</div>
-<br>
-<br>
-    <div id="disqus_thread"></div>
-	<div class="footer">
-		<p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
-	</div>
-</div>
-<script src="/main.js"></script>
-<script id="content" type="text/mustache">
-    <h1>{{title}}</h1>
-    <div class="tag">
-    {{date}} by {{author}}
-    {{#tags}}
-    <a href="/#/tag/{{name}}">#{{name}}</a>
-    {{/tags}}
+        </div>
+        <br>
+        <br>
+        <div id="disqus_thread"></div>
+        <div class="footer">
+            <p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
+        </div>
     </div>
-</script>
-<script id="pagesTemplate" type="text/mustache">
-    {{#pages}}
-    <li>
-        <a href="{{path}}">{{title}}</a>
-    </li>
-    {{/pages}}
-</script>
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: "/main.json",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $("#title").html(data.name);
-            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
-            var pagesHtml = pagesTemplate.render({"pages": data.pages});
-            $("#pages").append(pagesHtml);
-            //path
-            var path = "pages/jsval.html";
-            //path end
-            var now = 0;
-            for (var i = 0; i < data.posts.length; ++i)
-                if (path == data.posts[i].path)
-                    now = i;
-            var post = data.posts[now];
-            var tmp = post.tags.split(" ");
-            var tags = [];
-            for (var i = 0; i < tmp.length; ++i)
-                if (tmp[i].length > 0)
-                    tags.push({"name": tmp[i]});
-            var contentTemplate = Hogan.compile($("#content").html());
-            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date, "author": post.author?post.author:"ZK"});
-            $("#main").prepend(contentHtml);
-            if (data.disqus_shortname.length > 0) {
-                var disqus_shortname = data.disqus_shortname;
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
+    <script src="/main.js"></script>
+    <script id="content" type="text/mustache">
+        <h1>{{title}}</h1>
+        <div class="tag">
+            {{date}} by {{author}} {{#tags}}
+            <a href="/#/tag/{{name}}">#{{name}}</a> {{/tags}}
+        </div>
+    </script>
+    <script id="pagesTemplate" type="text/mustache">
+        {{#pages}}
+        <li>
+            <a href="{{path}}">{{title}}</a>
+        </li>
+        {{/pages}}
+    </script>
+    <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "/main.json",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                $("#title").html(data.name);
+                var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+                var pagesHtml = pagesTemplate.render({
+                    "pages": data.pages
+                });
+                $("#pages").append(pagesHtml);
+                //path
+                var path = "pages/jsval.html";
+                //path end
+                var now = 0;
+                for (var i = 0; i < data.posts.length; ++i)
+                    if (path == data.posts[i].path)
+                        now = i;
+                var post = data.posts[now];
+                var tmp = post.tags.split(" ");
+                var tags = [];
+                for (var i = 0; i < tmp.length; ++i)
+                    if (tmp[i].length > 0)
+                        tags.push({
+                            "name": tmp[i]
+                        });
+                var contentTemplate = Hogan.compile($("#content").html());
+                var contentHtml = contentTemplate.render({
+                    "title": post.title,
+                    "tags": tags,
+                    "date": post.date,
+                    "author": post.author ? post.author : data.name
+                });
+                $("#main").prepend(contentHtml);
             }
-        }
+        });
     });
-});
-</script>
-<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
+    </script>
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+    </script>
 </body>
+
 </html>

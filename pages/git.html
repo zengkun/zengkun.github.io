@@ -1,29 +1,32 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="Keywords" content="blog"/>
-    <meta name="Description" content="blog"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="blog" />
+    <meta name="Description" content="blog" />
     <title>学习笔记</title>
-    <link rel="shortcut icon" href="/favicon.jpg"/>
+    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
 </head>
+
 <body>
-<div class="main">
-    <div class="header">
-    	<ul id="pages">
-            <li><a href="/">home</a></li>
-            <li><a href="/#/tags">tags</a></li>
-            <li><a href="/#/archive">archive</a></li>
-    	</ul>
-    </div>
-	<div class="wrap-header">
-	<h1>
-    <a href="/" id="title"></a>
-	</h1>
-	</div>
-<div id="md" style="display: none;">
+    <div class="main">
+        <div class="header">
+            <ul id="pages">
+                <li><a href="/">home</a></li>
+                <li><a href="/#/tags">tags</a></li>
+                <li><a href="/#/archive">archive</a></li>
+            </ul>
+        </div>
+        <div class="wrap-header">
+            <h1>
+                <a href="/" id="title"></a>
+            </h1>
+        </div>
+        <div id="md" style="display: none;">
+        <!-- 不能有缩进 -->
 <!-- markdown -->
 ## Git相关下载
   <https://git-scm.com/download/win>
@@ -35,24 +38,24 @@
 
 #### clone项目 复制地址时 因SSH会有端口号问题  故选https
 * 直接clone：（带上用户名、密码）
-``` bash
+```
 git clone https://用户名:用户密码@gitURL
 ```
 
 * 弹出登录clone：（不带用户名、密码）
-``` bash
+```
 git clone gitURL
 ```
 
 #### 若在windows下用 git clone gitURL 
 * 提示：SSL certificate problem: self signed certificate
-``` bash
+```
 此问题在windows下出现得频率高些。我估计主要是git本身就是基于linux开发的，
 在windows上，容易缺失一些环境。参考了一些文章，解决方法其实就是“直接不管ssl证书的事儿”
 ```
 
 * 用git自带的配置命令：
-``` bash
+```
 git config --global http.sslVerify false
 ``` 
 
@@ -123,11 +126,11 @@ git push
 ```
 
 * 创建分支
-``` bash
+```
 git branch name
 ```
 * 切换分支
-``` bash
+```
 git checkout name
 ```
 * 创建分支并切换
@@ -135,7 +138,7 @@ git checkout name
 git checkout -b name
 ```
 * 两个使用过的分支来回切换
-``` bash
+```
 git checkout -
 ```
 * 查看本地分支
@@ -174,11 +177,11 @@ git remote -v
 ```
 
 * 重命名
-``` bash
+```
 git mv oldfilename newfilename 
 ```
 * 单行查看log列表
-``` bash
+```
 git log --pretty=oneline
 
 指定log格式  hash + msg + n days ago
@@ -189,25 +192,25 @@ git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C
 * 查找最近的一条提交信息，并显示改动文件详情对比
 
 query（区别大小写）：查询的关键词
-``` bash
+```
 git show :/query
 ```
 
 * 查看分支合并
-``` bash
+```
 $ git branch --merged
 ```
 显示所有已经合并到你当前分支的分支列表
 
 相反地：
-``` bash
+```
 $ git branch --no-merged
 ```
 会显示所有还没有合并到你当前分支的分支列表
 
 
 * 使用 --allow-empty 选项强制创建一个没有任何改动的提交
-``` bash
+```
 $ git commit -m "Big-ass commit" --allow-empty
 ```
 这样做在如下几种情况下是有意义的：
@@ -216,12 +219,12 @@ $ git commit -m "Big-ass commit" --allow-empty
 记录你对项目进行了跟代码无关的改动。
 跟使用你仓库的其他人交流。
 作为仓库的第一次提交，因为第一次提交日后是不能被`rebase`的： 
-``` bash
+```
 git commit -m "init repo" --allow-empty
 ```
 
 * 修改提交信息、合并多次提交为一次记录
-``` bash
+```
 git rebase -i HEAD  （HEAD^/HEAD^^/...   或者某一次提交前一次的hash值）
 
 根据命令提示修改信息，保存退出编辑器
@@ -240,7 +243,7 @@ git stash pop 或 git stash apply
 * 更新本地和远程同步（覆盖本地）
 
 1\. 第一种方法
-``` bash
+```
 git fetch --all 
 git reset --hard origin/master
 git pull
@@ -248,14 +251,14 @@ git pull
 说明：git fetch下载远程最新的， 然后，git reset master分支重置
 ```
 2\. 第二种方法
-``` bash
+```
 git reset --hard HEAD 
 git pull
 
 说明：重置回某次（提交的HASH）提交的状态
 ```
 * 还原未提交的修改
-``` bash
+```
 git checkout .
 ```
 
@@ -269,7 +272,7 @@ git checkout .
 
 
 * 查看配置
-``` bash
+```
 git config --list
 git config user.name (具体配置)
 ```
@@ -278,20 +281,20 @@ git config user.name (具体配置)
 
 在Windows下Git的默认编辑器是vim。如果想换成其它的编辑器，比如 Sublime Text 可以使用如下方法：
 需要为编辑器的路径单独添加单引号，否则配置不会成功
-``` bash
+```
 git config --global core.editor "'D:\SublimeText_XP85\Sublime_Text_Build_3095_x64_CHS_Lfqy_Green\Sublime Text\sublime_text.exe' -w"
 ```
 
 * rebase操作中断时，会出现git不在任何分支上 解决：
 
 1\. 是无风险的操作，会回到rebase操作之前的状态，2个分支的commits毫发无损。
-``` bash
+```
 常用
 
 git rebase --abort
 ```
 2\. 是高风险的操作，引起冲突的commits会被丢弃（这部分代码修改会丢失）。
-``` bash
+```
 git rebase --skip
 ```
 3\. 在rebase的过程中，也许会出现冲突(conflict). 
@@ -396,7 +399,7 @@ git config --global color.ui 1
 
 #### 使用
 1\. 配置ftp信息
-``` bash
+```
 cd kuyun-eye 目录
 git config git-ftp.user 用户名
 git config git-ftp.url ftp://IP或地址:端口/目录
@@ -404,27 +407,27 @@ git config git-ftp.password 密码
 ```
 
 2\. Upload all files 第一次会上传所有文件到ftp目录
-``` bash
+```
 git ftp init
 ```
 
 3\. Or if the files are already there
-``` bash
+```
 git ftp catchup
 ```
 
 4\. 更新到ftp
-``` bash
+```
 git ftp push
 ```
 
 说明：
 这个工具有两个是我们感兴趣的:init和push,init命令是只用于第一次使用和上传你git仓库的所有文件到一个ftp服务器里面，并且它会创建一个小文件.git-ftp.log在服务器上面,它用于校验当前部署到服务器的提交(commit)。你可以运行它像:
-``` bash
+```
 git ftp init --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/path/to/website/
 ```
 在初始化 ftp 服务器之后你可以在git中开始一个新的提交(commit) 和 部署改变的文件，使用`git-ftp`的push命令：
-``` bash
+```
 git ftp push --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/path/to/website/
 ```
 总结：
@@ -432,7 +435,7 @@ git ftp push --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/pat
 
 排查问题的小技巧:
 如果 catchup 失败，从默认给出的错误信息根本定位不了问题，或者说是 debug 信息就是错误的。可以在所有命令后面加上 -vv 来查看具体的 debug 信息, 例如
-``` bash
+```
 git ftp catchup -vv
 ```
 -vv 的说明
@@ -452,25 +455,25 @@ github上有个很方便的功能叫fork，将别人的工程一键复制到自�
 ##### 步骤流程
 1\. 在本地装好github客户端或git客户端
 2\. clone 自己的fork分支到本地，可以直接使用github客户端，clone到本地，如果使用命令行，命令为：
-``` bash
+```
 git clone gitURL
 ```
 3\. 增加源分支地址到你项目远程分支列表中(此处是关键)，先得将原来的仓库指定为upstream，命令为：
-``` bash
+```
 git remote add upstream https://github.com/被fork的仓库.git
 
 此处可使用git remote -v查看远程分支列表
 ```
 4\. fetch源分支的新版本到本地
-``` bash
+```
 git fetch upstream
 ```
 5\. 合并两个版本的代码
-``` bash
+```
 git merge upstream/master
 ```
 6\. 将合并后的代码push到github上去
-``` bash
+```
 git push origin master
 ```
 
@@ -486,7 +489,7 @@ Merges any changes fetched into your working files
 ##### 更新 *forked* 的代码总结
 
 1\. 第一种方法
-``` bash
+```
 git remote add upstream gitURL
 git remote -v
 git fetch upstream
@@ -494,7 +497,7 @@ git merge upstream/master
 git push origin master
 ```
 2\. 第二种方法
-``` bash
+```
 git pull gitURL master (远程仓库)
 git push gitURL master 
 或 
@@ -510,11 +513,11 @@ git push origin master (自己的仓库)
 
 #### 安装ruby
 查看是否安装成功
-``` bash
+```
 ruby --version
 ```
 #### 安装githug 
-``` bash
+```
 gem install githug 
 ```
 需要翻墙，报错
@@ -522,7 +525,7 @@ gem install githug
 <http://blog.csdn.net/chinazgr/article/details/52932391>
 
 使用镜像（详情见参考地址）
-``` bash
+```
 gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
 或
 gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
@@ -532,7 +535,7 @@ C:\Users\kun>gem sources -l
 ```
 
 然后再安装一遍
-``` bash
+```
 gem install githug
 ```
 
@@ -541,7 +544,7 @@ gem install githug
 <http://www.jianshu.com/p/1910053e65f7><br>
 <https://githug.zhang-ou.com/>
 
-``` bash
+```
 No githug directory found, do you wish to create one? [yn]y
 Welcome to Githug!
 
@@ -552,32 +555,33 @@ cd git_hug
 
 ##### 开始闯关
 1\. 有一个新的目录“git_hug”被创建了，在它里面初始化一个仓库
-``` bash
+```
 git init
 ```
 2\. 设置你的用户名与电子邮箱，这很重要，只有这样你的提交才会被识别
-``` bash
+```
 git config --local user.name 用户名
 git config --local user.email 用户邮箱
 ```
 3\. 有一个名叫“README”的文件夹，你要将它加入到暂存区。
  注意：每一关都是一个新仓库，不要在前面的关卡找文件。
-``` bash
+```
 git add README
 ```
 4\. “README”文件已经被加入到暂存区，现在提交它。
-``` bash
+```
 git commit -m "add README"
 ```
 5\. 从“https://github.com/Gazler/cloneme”克隆仓库。
-``` bash
+```
 git clone https://github.com/Gazler/cloneme
 ```
 ......
 
 <!-- markdown end -->
-</div>
-<div class="entry" id="main">
+        </div>
+        <div class="entry" id="main">
+        <!-- 不能有缩进 -->
 <!-- content -->
 <h2 id="git">Git相关下载</h2>
 
@@ -593,14 +597,14 @@ git clone https://github.com/Gazler/cloneme
 <li>直接clone：（带上用户名、密码）</li>
 </ul>
 
-<pre><code class=" bash">git clone https://用户名:用户密码@gitURL
+<pre><code>git clone https://用户名:用户密码@gitURL
 </code></pre>
 
 <ul>
 <li>弹出登录clone：（不带用户名、密码）</li>
 </ul>
 
-<pre><code class=" bash">git clone gitURL
+<pre><code>git clone gitURL
 </code></pre>
 
 <h4 id="windowsgitclonegiturl">若在windows下用 git clone gitURL</h4>
@@ -609,7 +613,7 @@ git clone https://github.com/Gazler/cloneme
 <li>提示：SSL certificate problem: self signed certificate</li>
 </ul>
 
-<pre><code class=" bash">此问题在windows下出现得频率高些。我估计主要是git本身就是基于linux开发的，
+<pre><code>此问题在windows下出现得频率高些。我估计主要是git本身就是基于linux开发的，
 在windows上，容易缺失一些环境。参考了一些文章，解决方法其实就是“直接不管ssl证书的事儿”
 </code></pre>
 
@@ -617,7 +621,7 @@ git clone https://github.com/Gazler/cloneme
 <li>用git自带的配置命令：</li>
 </ul>
 
-<pre><code class=" bash">git config --global http.sslVerify false
+<pre><code>git config --global http.sslVerify false
 </code></pre>
 
 <h4 id="">常用命令记录</h4>
@@ -714,14 +718,14 @@ git reset HEAD dir/filename(s)
 <li>创建分支</li>
 </ul>
 
-<pre><code class=" bash">git branch name
+<pre><code>git branch name
 </code></pre>
 
 <ul>
 <li>切换分支</li>
 </ul>
 
-<pre><code class=" bash">git checkout name
+<pre><code>git checkout name
 </code></pre>
 
 <ul>
@@ -735,7 +739,7 @@ git reset HEAD dir/filename(s)
 <li>两个使用过的分支来回切换</li>
 </ul>
 
-<pre><code class=" bash">git checkout -
+<pre><code>git checkout -
 </code></pre>
 
 <ul>
@@ -792,14 +796,14 @@ git push origin :branch-name
 <li>重命名</li>
 </ul>
 
-<pre><code class=" bash">git mv oldfilename newfilename 
+<pre><code>git mv oldfilename newfilename 
 </code></pre>
 
 <ul>
 <li>单行查看log列表</li>
 </ul>
 
-<pre><code class=" bash">git log --pretty=oneline
+<pre><code>git log --pretty=oneline
 
 指定log格式  hash + msg + n days ago
 
@@ -812,21 +816,21 @@ git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C
 
 <p>query（区别大小写）：查询的关键词</p>
 
-<pre><code class=" bash">git show :/query
+<pre><code>git show :/query
 </code></pre>
 
 <ul>
 <li>查看分支合并</li>
 </ul>
 
-<pre><code class=" bash">$ git branch --merged
+<pre><code>$ git branch --merged
 </code></pre>
 
 <p>显示所有已经合并到你当前分支的分支列表</p>
 
 <p>相反地：</p>
 
-<pre><code class=" bash">$ git branch --no-merged
+<pre><code>$ git branch --no-merged
 </code></pre>
 
 <p>会显示所有还没有合并到你当前分支的分支列表</p>
@@ -835,7 +839,7 @@ git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C
 <li>使用 --allow-empty 选项强制创建一个没有任何改动的提交</li>
 </ul>
 
-<pre><code class=" bash">$ git commit -m "Big-ass commit" --allow-empty
+<pre><code>$ git commit -m "Big-ass commit" --allow-empty
 </code></pre>
 
 <p>这样做在如下几种情况下是有意义的：</p>
@@ -845,14 +849,14 @@ git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C
 跟使用你仓库的其他人交流。
 作为仓库的第一次提交，因为第一次提交日后是不能被<code>rebase</code>的： </p>
 
-<pre><code class=" bash">git commit -m "init repo" --allow-empty
+<pre><code>git commit -m "init repo" --allow-empty
 </code></pre>
 
 <ul>
 <li>修改提交信息、合并多次提交为一次记录</li>
 </ul>
 
-<pre><code class=" bash">git rebase -i HEAD  （HEAD^/HEAD^^/...   或者某一次提交前一次的hash值）
+<pre><code>git rebase -i HEAD  （HEAD^/HEAD^^/...   或者某一次提交前一次的hash值）
 
 根据命令提示修改信息，保存退出编辑器
 r/reword  修改提交信息    修改当前的提交信息
@@ -875,7 +879,7 @@ git stash pop 或 git stash apply
 
 <p>1. 第一种方法</p>
 
-<pre><code class=" bash">git fetch --all 
+<pre><code>git fetch --all 
 git reset --hard origin/master
 git pull
 
@@ -884,7 +888,7 @@ git pull
 
 <p>2. 第二种方法</p>
 
-<pre><code class=" bash">git reset --hard HEAD 
+<pre><code>git reset --hard HEAD 
 git pull
 
 说明：重置回某次（提交的HASH）提交的状态
@@ -894,7 +898,7 @@ git pull
 <li>还原未提交的修改</li>
 </ul>
 
-<pre><code class=" bash">git checkout .
+<pre><code>git checkout .
 </code></pre>
 
 <ul>
@@ -911,7 +915,7 @@ git pull
 <li>查看配置</li>
 </ul>
 
-<pre><code class=" bash">git config --list
+<pre><code>git config --list
 git config user.name (具体配置)
 </code></pre>
 
@@ -922,7 +926,7 @@ git config user.name (具体配置)
 <p>在Windows下Git的默认编辑器是vim。如果想换成其它的编辑器，比如 Sublime Text 可以使用如下方法：
 需要为编辑器的路径单独添加单引号，否则配置不会成功</p>
 
-<pre><code class=" bash">git config --global core.editor "'D:\SublimeText_XP85\Sublime_Text_Build_3095_x64_CHS_Lfqy_Green\Sublime Text\sublime_text.exe' -w"
+<pre><code>git config --global core.editor "'D:\SublimeText_XP85\Sublime_Text_Build_3095_x64_CHS_Lfqy_Green\Sublime Text\sublime_text.exe' -w"
 </code></pre>
 
 <ul>
@@ -931,14 +935,14 @@ git config user.name (具体配置)
 
 <p>1. 是无风险的操作，会回到rebase操作之前的状态，2个分支的commits毫发无损。</p>
 
-<pre><code class=" bash">常用
+<pre><code>常用
 
 git rebase --abort
 </code></pre>
 
 <p>2. 是高风险的操作，引起冲突的commits会被丢弃（这部分代码修改会丢失）。</p>
 
-<pre><code class=" bash">git rebase --skip
+<pre><code>git rebase --skip
 </code></pre>
 
 <p>3. 在rebase的过程中，也许会出现冲突(conflict). </p>
@@ -1062,7 +1066,7 @@ cp ~/git-ftp.git/git-ftp /bin/git-ftp
 
 <p>1. 配置ftp信息</p>
 
-<pre><code class=" bash">cd kuyun-eye 目录
+<pre><code>cd kuyun-eye 目录
 git config git-ftp.user 用户名
 git config git-ftp.url ftp://IP或地址:端口/目录
 git config git-ftp.password 密码
@@ -1070,28 +1074,28 @@ git config git-ftp.password 密码
 
 <p>2. Upload all files 第一次会上传所有文件到ftp目录</p>
 
-<pre><code class=" bash">git ftp init
+<pre><code>git ftp init
 </code></pre>
 
 <p>3. Or if the files are already there</p>
 
-<pre><code class=" bash">git ftp catchup
+<pre><code>git ftp catchup
 </code></pre>
 
 <p>4. 更新到ftp</p>
 
-<pre><code class=" bash">git ftp push
+<pre><code>git ftp push
 </code></pre>
 
 <p>说明：
 这个工具有两个是我们感兴趣的:init和push,init命令是只用于第一次使用和上传你git仓库的所有文件到一个ftp服务器里面，并且它会创建一个小文件.git-ftp.log在服务器上面,它用于校验当前部署到服务器的提交(commit)。你可以运行它像:</p>
 
-<pre><code class=" bash">git ftp init --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/path/to/website/
+<pre><code>git ftp init --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/path/to/website/
 </code></pre>
 
 <p>在初始化 ftp 服务器之后你可以在git中开始一个新的提交(commit) 和 部署改变的文件，使用<code>git-ftp</code>的push命令：</p>
 
-<pre><code class=" bash">git ftp push --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/path/to/website/
+<pre><code>git ftp push --user USERNAME --passwd PASSWORD ftp://YOUR-FTP-SERVER-ADDRESS/path/to/website/
 </code></pre>
 
 <p>总结：
@@ -1100,7 +1104,7 @@ git config git-ftp.password 密码
 <p>排查问题的小技巧:
 如果 catchup 失败，从默认给出的错误信息根本定位不了问题，或者说是 debug 信息就是错误的。可以在所有命令后面加上 -vv 来查看具体的 debug 信息, 例如</p>
 
-<pre><code class=" bash">git ftp catchup -vv
+<pre><code>git ftp catchup -vv
 </code></pre>
 
 <p>-vv 的说明
@@ -1124,29 +1128,29 @@ git config git-ftp.password 密码
 <p>1. 在本地装好github客户端或git客户端
 2. clone 自己的fork分支到本地，可以直接使用github客户端，clone到本地，如果使用命令行，命令为：</p>
 
-<pre><code class=" bash">git clone gitURL
+<pre><code>git clone gitURL
 </code></pre>
 
 <p>3. 增加源分支地址到你项目远程分支列表中(此处是关键)，先得将原来的仓库指定为upstream，命令为：</p>
 
-<pre><code class=" bash">git remote add upstream https://github.com/被fork的仓库.git
+<pre><code>git remote add upstream https://github.com/被fork的仓库.git
 
 此处可使用git remote -v查看远程分支列表
 </code></pre>
 
 <p>4. fetch源分支的新版本到本地</p>
 
-<pre><code class=" bash">git fetch upstream
+<pre><code>git fetch upstream
 </code></pre>
 
 <p>5. 合并两个版本的代码</p>
 
-<pre><code class=" bash">git merge upstream/master
+<pre><code>git merge upstream/master
 </code></pre>
 
 <p>6. 将合并后的代码push到github上去</p>
 
-<pre><code class=" bash">git push origin master
+<pre><code>git push origin master
 </code></pre>
 
 <h5 id="">官方解决办法</h5>
@@ -1162,7 +1166,7 @@ Merges any changes fetched into your working files
 
 <p>1. 第一种方法</p>
 
-<pre><code class=" bash">git remote add upstream gitURL
+<pre><code>git remote add upstream gitURL
 git remote -v
 git fetch upstream
 git merge upstream/master
@@ -1171,7 +1175,7 @@ git push origin master
 
 <p>2. 第二种方法</p>
 
-<pre><code class=" bash">git pull gitURL master (远程仓库)
+<pre><code>git pull gitURL master (远程仓库)
 git push gitURL master 
 或 
 git push origin master (自己的仓库)
@@ -1191,12 +1195,12 @@ git push origin master (自己的仓库)
 
 <p>查看是否安装成功</p>
 
-<pre><code class=" bash">ruby --version
+<pre><code>ruby --version
 </code></pre>
 
 <h4 id="githug">安装githug</h4>
 
-<pre><code class=" bash">gem install githug 
+<pre><code>gem install githug 
 </code></pre>
 
 <p>需要翻墙，报错
@@ -1205,7 +1209,7 @@ git push origin master (自己的仓库)
 
 <p>使用镜像（详情见参考地址）</p>
 
-<pre><code class=" bash">gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
+<pre><code>gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
 或
 gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
 
@@ -1215,7 +1219,7 @@ C:\Users\kun&gt;gem sources -l
 
 <p>然后再安装一遍</p>
 
-<pre><code class=" bash">gem install githug
+<pre><code>gem install githug
 </code></pre>
 
 <h4 id="githug">执行githug进入闯关游戏</h4>
@@ -1224,7 +1228,7 @@ C:\Users\kun&gt;gem sources -l
 <a href="http://www.jianshu.com/p/1910053e65f7">http://www.jianshu.com/p/1910053e65f7</a><br>
 <a href="https://githug.zhang-ou.com/">https://githug.zhang-ou.com/</a></p>
 
-<pre><code class=" bash">No githug directory found, do you wish to create one? [yn]y
+<pre><code>No githug directory found, do you wish to create one? [yn]y
 Welcome to Githug!
 
 y 当前目录下创建一个名为git_hug子目录，然后进入目录
@@ -1236,100 +1240,100 @@ cd git_hug
 
 <p>1. 有一个新的目录“git_hug”被创建了，在它里面初始化一个仓库</p>
 
-<pre><code class=" bash">git init
+<pre><code>git init
 </code></pre>
 
 <p>2. 设置你的用户名与电子邮箱，这很重要，只有这样你的提交才会被识别</p>
 
-<pre><code class=" bash">git config --local user.name 用户名
+<pre><code>git config --local user.name 用户名
 git config --local user.email 用户邮箱
 </code></pre>
 
 <p>3. 有一个名叫“README”的文件夹，你要将它加入到暂存区。
  注意：每一关都是一个新仓库，不要在前面的关卡找文件。</p>
 
-<pre><code class=" bash">git add README
+<pre><code>git add README
 </code></pre>
 
 <p>4. “README”文件已经被加入到暂存区，现在提交它。</p>
 
-<pre><code class=" bash">git commit -m "add README"
+<pre><code>git commit -m "add README"
 </code></pre>
 
 <p>5. 从“https://github.com/Gazler/cloneme”克隆仓库。</p>
 
-<pre><code class=" bash">git clone https://github.com/Gazler/cloneme
+<pre><code>git clone https://github.com/Gazler/cloneme
 </code></pre>
 
 <p>......</p>
 <!-- content end -->
-</div>
-<br>
-<br>
-    <div id="disqus_thread"></div>
-	<div class="footer">
-		<p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
-	</div>
-</div>
-<script src="/main.js"></script>
-<script id="content" type="text/mustache">
-    <h1>{{title}}</h1>
-    <div class="tag">
-    {{date}} by {{author}}
-    {{#tags}}
-    <a href="/#/tag/{{name}}">#{{name}}</a>
-    {{/tags}}
+        </div>
+        <br>
+        <br>
+        <div id="disqus_thread"></div>
+        <div class="footer">
+            <p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
+        </div>
     </div>
-</script>
-<script id="pagesTemplate" type="text/mustache">
-    {{#pages}}
-    <li>
-        <a href="{{path}}">{{title}}</a>
-    </li>
-    {{/pages}}
-</script>
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: "/main.json",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $("#title").html(data.name);
-            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
-            var pagesHtml = pagesTemplate.render({"pages": data.pages});
-            $("#pages").append(pagesHtml);
-            //path
-            var path = "pages/git.html";
-            //path end
-            var now = 0;
-            for (var i = 0; i < data.posts.length; ++i)
-                if (path == data.posts[i].path)
-                    now = i;
-            var post = data.posts[now];
-            var tmp = post.tags.split(" ");
-            var tags = [];
-            for (var i = 0; i < tmp.length; ++i)
-                if (tmp[i].length > 0)
-                    tags.push({"name": tmp[i]});
-            var contentTemplate = Hogan.compile($("#content").html());
-            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date, "author": post.author?post.author:"ZK"});
-            $("#main").prepend(contentHtml);
-            if (data.disqus_shortname.length > 0) {
-                var disqus_shortname = data.disqus_shortname;
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
+    <script src="/main.js"></script>
+    <script id="content" type="text/mustache">
+        <h1>{{title}}</h1>
+        <div class="tag">
+            {{date}} by {{author}} {{#tags}}
+            <a href="/#/tag/{{name}}">#{{name}}</a> {{/tags}}
+        </div>
+    </script>
+    <script id="pagesTemplate" type="text/mustache">
+        {{#pages}}
+        <li>
+            <a href="{{path}}">{{title}}</a>
+        </li>
+        {{/pages}}
+    </script>
+    <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "/main.json",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                $("#title").html(data.name);
+                var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+                var pagesHtml = pagesTemplate.render({
+                    "pages": data.pages
+                });
+                $("#pages").append(pagesHtml);
+                //path
+                var path = "pages/git.html";
+                //path end
+                var now = 0;
+                for (var i = 0; i < data.posts.length; ++i)
+                    if (path == data.posts[i].path)
+                        now = i;
+                var post = data.posts[now];
+                var tmp = post.tags.split(" ");
+                var tags = [];
+                for (var i = 0; i < tmp.length; ++i)
+                    if (tmp[i].length > 0)
+                        tags.push({
+                            "name": tmp[i]
+                        });
+                var contentTemplate = Hogan.compile($("#content").html());
+                var contentHtml = contentTemplate.render({
+                    "title": post.title,
+                    "tags": tags,
+                    "date": post.date,
+                    "author": post.author ? post.author : data.name
+                });
+                $("#main").prepend(contentHtml);
             }
-        }
+        });
     });
-});
-</script>
-<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
+    </script>
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+    </script>
 </body>
+
 </html>

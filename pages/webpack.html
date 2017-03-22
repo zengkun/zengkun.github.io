@@ -28,40 +28,37 @@
         <div id="md" style="display: none;">
         <!-- 不能有缩进 -->
 <!-- markdown -->
-### 如题：
-~~~~{javascript}
-(10).add(10).reduce(2).add(10)
-~~~~
-利用函数原型
+## 安装webpack
+```
+npm install webpack -g
+```
+安装后，运行
+```
+webpack -v
+```
+报错：
+![1](webpack/1.png "")
 
-~~~~{javascript}
-Number.prototype.add = function(num) {
-	return this + num;
-}
 
-Number.prototype.reduce = function(num) {
-	return this - num;
-}
-~~~~
+
 
 <!-- markdown end -->
         </div>
         <div class="entry" id="main">
         <!-- 不能有缩进 -->
 <!-- content -->
-<h3 id="">如题：</h3>
+<h2 id="webpack">安装webpack</h2>
 
-<pre class=" language-javascript"><code class=" language-javascript"><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add<span class="token punctuation">(</span></span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reduce<span class="token punctuation">(</span></span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add<span class="token punctuation">(</span></span><span class="token number">10</span><span class="token punctuation">)</span>
-</code></pre>利用函数原型
-
-<pre class=" language-javascript"><code class=" language-javascript">Number<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>add <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span> <span class="token operator">+</span> num<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-Number<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>reduce <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span> <span class="token operator">-</span> num<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<pre><code>npm install webpack -g
 </code></pre>
+
+<p>安装后，运行</p>
+
+<pre><code>webpack -v
+</code></pre>
+
+<p>报错：
+<img src="webpack/1.png" alt="1" title=""></p>
 <!-- content end -->
         </div>
         <br>
@@ -100,7 +97,7 @@ Number<span class="token punctuation">.</span>prototype<span class="token punctu
                 });
                 $("#pages").append(pagesHtml);
                 //path
-                var path = "pages/numproto.html";
+                var path = "pages/webpack.html";
                 //path end
                 var now = 0;
                 for (var i = 0; i < data.posts.length; ++i)

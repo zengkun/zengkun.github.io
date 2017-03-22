@@ -28,40 +28,110 @@
         <div id="md" style="display: none;">
         <!-- 不能有缩进 -->
 <!-- markdown -->
-### 如题：
-~~~~{javascript}
-(10).add(10).reduce(2).add(10)
-~~~~
-利用函数原型
-
-~~~~{javascript}
-Number.prototype.add = function(num) {
-	return this + num;
-}
-
-Number.prototype.reduce = function(num) {
-	return this - num;
-}
-~~~~
-
+## 1、创建分支
+创建分支很简单：
+```
+git branch <分支名>
+```
+## 2、切换分支
+```
+git checkout <分支名>
+```
+该语句和上一个语句可以和起来用一个语句表示：
+```
+git checkout -b <分支名>
+```
+## 3、分支合并
+比如，如果要将开发中的分支（`develop`），合并到稳定分支（`master`），
+首先切换的master分支：
+```
+git checkout master
+```
+然后执行合并操作：
+```
+git merge develop
+```
+如果有冲突，会提示你，调用`git status`查看冲突文件。<br>
+解决冲突，然后调用`git add`或`git rm`将解决后的文件暂存。<br>
+所有冲突解决后，`git commit` 提交更改。
+## 4、分支衍合
+分支衍合和分支合并的差别在于，分支衍合不会保留合并的日志，不留痕迹，而 分支合并则会保留合并的日志。
+要将开发中的分支（`develop`），衍合到稳定分支（`master`）。
+首先切换的master分支：
+```
+git checkout master
+```
+然后执行衍和操作：
+```
+git rebase develop
+```
+如果有冲突，会提示你，调用`git status`查看冲突文件。<br>
+解决冲突，然后调用`git add`或`git rm`将解决后的文件暂存。<br>
+所有冲突解决后，`git rebase --continue` 提交更改。
+## 5、删除分支
+执行`git branch -d <分支名>`
+如果该分支没有合并到主分支会报错，可以用以下命令强制删除`git branch -D <分支名>`
 <!-- markdown end -->
         </div>
         <div class="entry" id="main">
         <!-- 不能有缩进 -->
 <!-- content -->
-<h3 id="">如题：</h3>
+<h2 id="1">1、创建分支</h2>
 
-<pre class=" language-javascript"><code class=" language-javascript"><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add<span class="token punctuation">(</span></span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reduce<span class="token punctuation">(</span></span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add<span class="token punctuation">(</span></span><span class="token number">10</span><span class="token punctuation">)</span>
-</code></pre>利用函数原型
+<p>创建分支很简单：</p>
 
-<pre class=" language-javascript"><code class=" language-javascript">Number<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>add <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span> <span class="token operator">+</span> num<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-Number<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>reduce <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span> <span class="token operator">-</span> num<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<pre><code>git branch &lt;分支名&gt;
 </code></pre>
+
+<h2 id="2">2、切换分支</h2>
+
+<pre><code>git checkout &lt;分支名&gt;
+</code></pre>
+
+<p>该语句和上一个语句可以和起来用一个语句表示：</p>
+
+<pre><code>git checkout -b &lt;分支名&gt;
+</code></pre>
+
+<h2 id="3">3、分支合并</h2>
+
+<p>比如，如果要将开发中的分支（<code>develop</code>），合并到稳定分支（<code>master</code>），
+首先切换的master分支：</p>
+
+<pre><code>git checkout master
+</code></pre>
+
+<p>然后执行合并操作：</p>
+
+<pre><code>git merge develop
+</code></pre>
+
+<p>如果有冲突，会提示你，调用<code>git status</code>查看冲突文件。<br>
+解决冲突，然后调用<code>git add</code>或<code>git rm</code>将解决后的文件暂存。<br>
+所有冲突解决后，<code>git commit</code> 提交更改。</p>
+
+<h2 id="4">4、分支衍合</h2>
+
+<p>分支衍合和分支合并的差别在于，分支衍合不会保留合并的日志，不留痕迹，而 分支合并则会保留合并的日志。
+要将开发中的分支（<code>develop</code>），衍合到稳定分支（<code>master</code>）。
+首先切换的master分支：</p>
+
+<pre><code>git checkout master
+</code></pre>
+
+<p>然后执行衍和操作：</p>
+
+<pre><code>git rebase develop
+</code></pre>
+
+<p>如果有冲突，会提示你，调用<code>git status</code>查看冲突文件。<br>
+解决冲突，然后调用<code>git add</code>或<code>git rm</code>将解决后的文件暂存。<br>
+所有冲突解决后，<code>git rebase --continue</code> 提交更改。</p>
+
+<h2 id="5">5、删除分支</h2>
+
+<p>执行<code>git branch -d &lt;分支名&gt;</code>
+如果该分支没有合并到主分支会报错，可以用以下命令强制删除<code>git branch -D &lt;分支名&gt;</code></p>
 <!-- content end -->
         </div>
         <br>
@@ -100,7 +170,7 @@ Number<span class="token punctuation">.</span>prototype<span class="token punctu
                 });
                 $("#pages").append(pagesHtml);
                 //path
-                var path = "pages/numproto.html";
+                var path = "pages/gitmerge.html";
                 //path end
                 var now = 0;
                 for (var i = 0; i < data.posts.length; ++i)

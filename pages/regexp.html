@@ -38,10 +38,7 @@ this.tempItems = this.items.filter((item) => {
 	return item.title.toUpperCase().includes(this.searchKey.toUpperCase())
 }).map((item, index) => {
 	var vKey = this.searchKey;
-        // 不分组
-        // var regExp = new RegExp(vKey, "gim");
-
-        // 分组
+        // 分组括号()用字符串拼接
 	var regExp = new RegExp("(" + vKey + ")", "gim");
 	return {
 		"title": item.title.replace(regExp, '<span class="red">$1</span>'),
@@ -49,6 +46,7 @@ this.tempItems = this.items.filter((item) => {
 	};
 })
 ~~~~
+
 <!-- markdown end -->
         </div>
         <div class="entry" id="main">
@@ -60,24 +58,18 @@ this.tempItems = this.items.filter((item) => {
 
 <h3 id="">解决：</h3>
 
-<p>~~~~{javascript}
-this.tempItems = this.items.filter((item) =&gt; {
-    return item.title.toUpperCase().includes(this.searchKey.toUpperCase())
-}).map((item, index) =&gt; {
-    var vKey = this.searchKey;
-        // 不分组
-        // var regExp = new RegExp(vKey, "gim");</p>
-
-<pre><code>    // 分组
-var regExp = new RegExp("(" + vKey + ")", "gim");
-return {
-    "title": item.title.replace(regExp, '&lt;span class="red"&gt;$1&lt;/span&gt;'),
-    "router": item.router
-};
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>tempItems <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">filter<span class="token punctuation">(</span></span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> item<span class="token punctuation">.</span>title<span class="token punctuation">.</span><span class="token function">toUpperCase<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">includes<span class="token punctuation">(</span></span><span class="token keyword">this</span><span class="token punctuation">.</span>searchKey<span class="token punctuation">.</span><span class="token function">toUpperCase<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map<span class="token punctuation">(</span></span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> index<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> vKey <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>searchKey<span class="token punctuation">;</span>
+       <span class="token comment" spellcheck="true"> // 分组括号()用字符串拼接
+</span>    <span class="token keyword">var</span> regExp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span><span class="token string">"("</span> <span class="token operator">+</span> vKey <span class="token operator">+</span> <span class="token string">")"</span><span class="token punctuation">,</span> <span class="token string">"gim"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        <span class="token string">"title"</span><span class="token punctuation">:</span> item<span class="token punctuation">.</span>title<span class="token punctuation">.</span><span class="token function">replace<span class="token punctuation">(</span></span>regExp<span class="token punctuation">,</span> <span class="token string">'&lt;span class="red"&gt;$1&lt;/span&gt;'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">"router"</span><span class="token punctuation">:</span> item<span class="token punctuation">.</span>router
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre>
-
-<p>})
-~~~~</p>
 <!-- content end -->
         </div>
         <br>

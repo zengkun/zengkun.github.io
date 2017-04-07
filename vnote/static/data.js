@@ -5,5 +5,8 @@ export default {
   },{
     title:"vue组件开发",
     router:"component"
+  },{
+    title:"add test",
+    router:"test"
   }]
 }

@@ -33,6 +33,7 @@
 今天在做 vue-note 关键字检索标题时，想通过输入关键字进行匹配，并给匹配到的关键词标红，开始使用循环存值再取出替换展示，会出现一个标题有多处时，关键词大小写匹配错乱，所以想到使用正则分组来匹配。
 
 ### 解决：
+1、`new RegExp`
 ~~~~{javascript}
 this.tempItems = this.items.filter((item) => {
 	return item.title.toUpperCase().includes(this.searchKey.toUpperCase())
@@ -47,6 +48,11 @@ this.tempItems = this.items.filter((item) => {
 })
 ~~~~
 
+2、`eval`（下下策，不解释 ~_~）
+~~~~{javascript}
+var regExp = eval("/(" + vKey + ")/gim");
+~~~~
+
 <!-- markdown end -->
         </div>
         <div class="entry" id="main">
@@ -57,6 +63,8 @@ this.tempItems = this.items.filter((item) => {
 <p>今天在做 vue-note 关键字检索标题时，想通过输入关键字进行匹配，并给匹配到的关键词标红，开始使用循环存值再取出替换展示，会出现一个标题有多处时，关键词大小写匹配错乱，所以想到使用正则分组来匹配。</p>
 
 <h3 id="">解决：</h3>
+
+<p>1、<code>new RegExp</code></p>
 
 <pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>tempItems <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>items<span class="token punctuation">.</span><span class="token function">filter<span class="token punctuation">(</span></span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> item<span class="token punctuation">.</span>title<span class="token punctuation">.</span><span class="token function">toUpperCase<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">includes<span class="token punctuation">(</span></span><span class="token keyword">this</span><span class="token punctuation">.</span>searchKey<span class="token punctuation">.</span><span class="token function">toUpperCase<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -69,6 +77,11 @@ this.tempItems = this.items.filter((item) => {
         <span class="token string">"router"</span><span class="token punctuation">:</span> item<span class="token punctuation">.</span>router
     <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+
+<p>2、<code>eval</code>（下下策，不解释 ~_~）</p>
+
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">var</span> regExp <span class="token operator">=</span> <span class="token function">eval<span class="token punctuation">(</span></span><span class="token string">"/("</span> <span class="token operator">+</span> vKey <span class="token operator">+</span> <span class="token string">")/gim"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <!-- content end -->
         </div>

@@ -1,0 +1,441 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="blog" />
+    <meta name="Description" content="blog" />
+    <title>学习笔记</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <ul id="pages">
+                <li><a href="/">home</a></li>
+                <li><a href="/#/tags">tags</a></li>
+                <li><a href="/#/archive">archive</a></li>
+            </ul>
+        </div>
+        <div class="wrap-header">
+            <h1>
+                <a href="/" id="title"></a>
+            </h1>
+        </div>
+        <div id="md" style="display: none;">
+        <!-- 不能有缩进 -->
+<!-- markdown -->
+一、显示信息的命令
+~~~~{javascript}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>常用console命令</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body>
+        <script type="text/javascript">
+            console.log('hello');
+           console.info('信息');
+           console.error('错误');
+           console.warn('警告');
+       </script>
+   </body>
+   </html>
+~~~~
+
+最常用的就是console.log了。
+
+二：占位符
+
+console上述的集中度支持printf的占位符格式，支持的占位符有：字符（%s）、整数（%d或%i）、浮点数（%f）和对象（%o）
+~~~~{javascript}
+    <script type="text/javascript">
+            console.log("%d年%d月%d日",2011,3,26);
+    </script>
+~~~~
+
+三、信息分组
+~~~~{javascript}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>常用console命令</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body>
+        <script type="text/javascript">
+            console.group("第一组信息");
+  
+       　　　　console.log("第一组第一条:我的博客(http://www.webhek.com)");
+  
+       　　　　console.log("第一组第二条:CSDN(http://blog.csdn.net/u011043843)");
+  
+       　　console.groupEnd();
+  
+   　　    console.group("第二组信息");
+  
+       　　　　console.log("第二组第一条:程序爱好者QQ群： 259280570");
+  
+       　　　　console.log("第二组第二条:欢迎你加入");
+  
+   　　    console.groupEnd();
+       </script>
+   </body>
+   </html>
+~~~~
+
+四、查看对象的信息
+~~~~{javascript}
+console.dir()可以显示一个对象所有的属性和方法。
+
+    <script type="text/javascript">
+            var info = {
+                blog:"http://www.webhek.com",
+                QQGroup:259280570,
+                message:"程序爱好者欢迎你的加入"
+            };
+            console.dir(info);
+    </script>
+~~~~
+
+五、显示某个节点的内容
+
+console.dirxml()用来显示网页的某个节点（node）所包含的html/xml代码。
+~~~~{javascript}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>常用console命令</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body>
+        <div id="info">
+            <h3>我的博客：www.webhek.com</h3>
+           <p>程序爱好者:259280570,欢迎你的加入</p>
+       </div>
+       <script type="text/javascript">
+           var info = document.getElementById('info');
+           console.dirxml(info);
+       </script>
+   </body>
+   </html>
+~~~~
+
+六、判断变量是否是真
+
+console.assert()用来判断一个表达式或变量是否为真。如果结果为否，则在控制台输出一条相应信息，并且抛出一个异常。
+~~~~{javascript}
+    <script type="text/javascript">
+        　　var result = 1;
+        　　console.assert( result );
+        　　var year = 2014;
+        　　console.assert(year == 2018 );
+    </script>
+1是非0值，是真；而第二个判断是假，在控制台显示错误信息
+~~~~
+
+七、追踪函数的调用轨迹。
+~~~~{javascript}
+console.trace()用来追踪函数的调用轨迹。
+
+    <script type="text/javascript">
+    /*函数是如何被调用的，在其中加入console.trace()方法就可以了*/
+    　　function add(a,b){
+            console.trace();
+    　　　　return a+b;
+    　　}
+    　　var x = add3(1,1);
+    　　function add3(a,b){return add2(a,b);}
+    　　function add2(a,b){return add1(a,b);}
+   　　function add1(a,b){return add(a,b);}
+   </script>
+~~~~
+
+八、计时功能
+~~~~{javascript}
+console.time()和console.timeEnd()，用来显示代码的运行时间。
+
+    <script type="text/javascript">
+    　　console.time("控制台计时器一");
+    　　for(var i=0;i<1000;i++){
+    　　　　for(var j=0;j<1000;j++){}
+    　　}
+    　　console.timeEnd("控制台计时器一");
+    </script>
+运行时间是38.84ms
+~~~~
+
+九、console.profile()的性能分析
+
+性能分析（Profiler）就是分析程序各个部分的运行时间，找出瓶颈所在，使用的方法是console.profile()。
+~~~~{javascript}
+    <script type="text/javascript">
+        　　function All(){
+                alert(11);
+    　　　　     for(var i=0;i<10;i++){
+                    funcA(1000);
+                 }
+    　　　　    funcB(10000);
+    　　    }
+   
+       　　function funcA(count){
+       　　　　for(var i=0;i<count;i++){}
+       　　}
+  
+       　　function funcB(count){
+       　　　　for(var i=0;i<count;i++){}
+       　　}
+  
+       　　console.profile('性能分析器');
+       　　All();
+       　　console.profileEnd();
+       </script>
+~~~~
+
+<!-- markdown end -->
+        </div>
+        <div class="entry" id="main">
+        <!-- 不能有缩进 -->
+<!-- content -->
+<p>一、显示信息的命令</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">    <span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>html<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>常用console命令<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"Content-Type"</span> content<span class="token operator">=</span><span class="token string">"text/html; charset=utf-8"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+            console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token string">'hello'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           console<span class="token punctuation">.</span><span class="token function">info<span class="token punctuation">(</span></span><span class="token string">'信息'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           console<span class="token punctuation">.</span><span class="token function">error<span class="token punctuation">(</span></span><span class="token string">'错误'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           console<span class="token punctuation">.</span><span class="token function">warn<span class="token punctuation">(</span></span><span class="token string">'警告'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
+</code></pre>
+
+<p>最常用的就是console.log了。</p>
+
+<p>二：占位符</p>
+
+<p>console上述的集中度支持printf的占位符格式，支持的占位符有：字符（%s）、整数（%d或%i）、浮点数（%f）和对象（%o）</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+            console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token string">"%d年%d月%d日"</span><span class="token punctuation">,</span><span class="token number">2011</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">26</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre>
+
+<p>三、信息分组</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">    <span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>html<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>常用console命令<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"Content-Type"</span> content<span class="token operator">=</span><span class="token string">"text/html; charset=utf-8"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+            console<span class="token punctuation">.</span><span class="token function">group<span class="token punctuation">(</span></span><span class="token string">"第一组信息"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       　　　　console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token string">"第一组第一条:我的博客(http://www.webhek.com)"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       　　　　console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token string">"第一组第二条:CSDN(http://blog.csdn.net/u011043843)"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       　　console<span class="token punctuation">.</span><span class="token function">groupEnd<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   　　    console<span class="token punctuation">.</span><span class="token function">group<span class="token punctuation">(</span></span><span class="token string">"第二组信息"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       　　　　console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token string">"第二组第一条:程序爱好者QQ群： 259280570"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       　　　　console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token string">"第二组第二条:欢迎你加入"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   　　    console<span class="token punctuation">.</span><span class="token function">groupEnd<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
+</code></pre>
+
+<p>四、查看对象的信息</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">dir<span class="token punctuation">(</span></span><span class="token punctuation">)</span>可以显示一个对象所有的属性和方法。
+
+    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+            <span class="token keyword">var</span> info <span class="token operator">=</span> <span class="token punctuation">{</span>
+                blog<span class="token punctuation">:</span><span class="token string">"http://www.webhek.com"</span><span class="token punctuation">,</span>
+                QQGroup<span class="token punctuation">:</span><span class="token number">259280570</span><span class="token punctuation">,</span>
+                message<span class="token punctuation">:</span><span class="token string">"程序爱好者欢迎你的加入"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">dir<span class="token punctuation">(</span></span>info<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre>
+
+<p>五、显示某个节点的内容</p>
+
+<p>console.dirxml()用来显示网页的某个节点（node）所包含的html/xml代码。</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">    <span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>html<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>常用console命令<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"Content-Type"</span> content<span class="token operator">=</span><span class="token string">"text/html; charset=utf-8"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"info"</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>h3<span class="token operator">&gt;</span>我的博客：www<span class="token punctuation">.</span>webhek<span class="token punctuation">.</span>com<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">&gt;</span>
+           <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span>程序爱好者<span class="token punctuation">:</span><span class="token number">259280570</span><span class="token punctuation">,</span>欢迎你的加入<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span>
+       <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+       <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+           <span class="token keyword">var</span> info <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById<span class="token punctuation">(</span></span><span class="token string">'info'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           console<span class="token punctuation">.</span><span class="token function">dirxml<span class="token punctuation">(</span></span>info<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
+</code></pre>
+
+<p>六、判断变量是否是真</p>
+
+<p>console.assert()用来判断一个表达式或变量是否为真。如果结果为否，则在控制台输出一条相应信息，并且抛出一个异常。</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+        　　<span class="token keyword">var</span> result <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        　　console<span class="token punctuation">.</span><span class="token function">assert<span class="token punctuation">(</span></span> result <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        　　<span class="token keyword">var</span> year <span class="token operator">=</span> <span class="token number">2014</span><span class="token punctuation">;</span>
+        　　console<span class="token punctuation">.</span><span class="token function">assert<span class="token punctuation">(</span></span>year <span class="token operator">==</span> <span class="token number">2018</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+<span class="token number">1</span>是非<span class="token number">0</span>值，是真；而第二个判断是假，在控制台显示错误信息
+</code></pre>
+
+<p>七、追踪函数的调用轨迹。</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">trace<span class="token punctuation">(</span></span><span class="token punctuation">)</span>用来追踪函数的调用轨迹。
+
+    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+    <span class="token comment" spellcheck="true">/*函数是如何被调用的，在其中加入console.trace()方法就可以了*/</span>
+    　　<span class="token keyword">function</span> <span class="token function">add<span class="token punctuation">(</span></span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">trace<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    　　　　<span class="token keyword">return</span> a<span class="token operator">+</span>b<span class="token punctuation">;</span>
+    　　<span class="token punctuation">}</span>
+    　　<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token function">add3<span class="token punctuation">(</span></span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    　　<span class="token keyword">function</span> <span class="token function">add3<span class="token punctuation">(</span></span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token function">add2<span class="token punctuation">(</span></span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    　　<span class="token keyword">function</span> <span class="token function">add2<span class="token punctuation">(</span></span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token function">add1<span class="token punctuation">(</span></span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+   　　<span class="token keyword">function</span> <span class="token function">add1<span class="token punctuation">(</span></span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token function">add<span class="token punctuation">(</span></span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre>
+
+<p>八、计时功能</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">time<span class="token punctuation">(</span></span><span class="token punctuation">)</span>和console<span class="token punctuation">.</span><span class="token function">timeEnd<span class="token punctuation">(</span></span><span class="token punctuation">)</span>，用来显示代码的运行时间。
+
+    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+    　　console<span class="token punctuation">.</span><span class="token function">time<span class="token punctuation">(</span></span><span class="token string">"控制台计时器一"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    　　<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">1000</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    　　　　<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>j<span class="token operator">&lt;</span><span class="token number">1000</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    　　<span class="token punctuation">}</span>
+    　　console<span class="token punctuation">.</span><span class="token function">timeEnd<span class="token punctuation">(</span></span><span class="token string">"控制台计时器一"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+运行时间是<span class="token number">38</span><span class="token punctuation">.</span>84ms
+</code></pre>
+
+<p>九、console.profile()的性能分析</p>
+
+<p>性能分析（Profiler）就是分析程序各个部分的运行时间，找出瓶颈所在，使用的方法是console.profile()。</p>
+
+<pre class=" language-javascript"><code class=" language-javascript">    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">&gt;</span>
+        　　<span class="token keyword">function</span> <span class="token function">All<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token function">alert<span class="token punctuation">(</span></span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    　　　　     <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token function">funcA<span class="token punctuation">(</span></span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token punctuation">}</span>
+    　　　　    <span class="token function">funcB<span class="token punctuation">(</span></span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    　　    <span class="token punctuation">}</span>
+
+       　　<span class="token keyword">function</span> <span class="token function">funcA<span class="token punctuation">(</span></span>count<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       　　　　<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>count<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+       　　<span class="token punctuation">}</span>
+
+       　　<span class="token keyword">function</span> <span class="token function">funcB<span class="token punctuation">(</span></span>count<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       　　　　<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>count<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+       　　<span class="token punctuation">}</span>
+
+       　　console<span class="token punctuation">.</span><span class="token function">profile<span class="token punctuation">(</span></span><span class="token string">'性能分析器'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       　　<span class="token function">All<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       　　console<span class="token punctuation">.</span><span class="token function">profileEnd<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre>
+<!-- content end -->
+        </div>
+        <br>
+        <br>
+        <div id="disqus_thread"></div>
+        <div class="footer">
+            <p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
+        </div>
+    </div>
+    <script src="/main.js"></script>
+    <script id="content" type="text/mustache">
+        <h1>{{title}}</h1>
+        <div class="tag">
+            {{date}} by {{author}} {{#tags}}
+            <a href="/#/tag/{{name}}">#{{name}}</a> {{/tags}}
+        </div>
+    </script>
+    <script id="pagesTemplate" type="text/mustache">
+        {{#pages}}
+        <li>
+            <a href="{{path}}">{{title}}</a>
+        </li>
+        {{/pages}}
+    </script>
+    <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "/main.json",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                $("#title").html(data.name);
+                var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+                var pagesHtml = pagesTemplate.render({
+                    "pages": data.pages
+                });
+                $("#pages").append(pagesHtml);
+                //path
+                var path = "pages/conloseuse.html";
+                //path end
+                var now = 0;
+                for (var i = 0; i < data.posts.length; ++i)
+                    if (path == data.posts[i].path)
+                        now = i;
+                var post = data.posts[now];
+                var tmp = post.tags.split(" ");
+                var tags = [];
+                for (var i = 0; i < tmp.length; ++i)
+                    if (tmp[i].length > 0)
+                        tags.push({
+                            "name": tmp[i]
+                        });
+                var contentTemplate = Hogan.compile($("#content").html());
+                var contentHtml = contentTemplate.render({
+                    "title": post.title,
+                    "tags": tags,
+                    "date": post.date,
+                    "author": post.author ? post.author : data.name
+                });
+                $("#main").prepend(contentHtml);
+            }
+        });
+    });
+    </script>
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+    </script>
+</body>
+
+</html>

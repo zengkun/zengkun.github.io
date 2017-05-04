@@ -135,6 +135,7 @@ if (e) {
 // 等同于
 e ? f = 'man' : f = 'woman';
 ~~~~
+
 <!-- markdown end -->
         </div>
         <div class="entry" id="main">
@@ -146,89 +147,88 @@ e ? f = 'man' : f = 'woman';
 
 <p>可能有人知道ES6中提供了新的数据结构 Set，但是能够灵活运用的人或许不多。利用Set数据结构我们能够轻松的去重一个数组，比如：</p>
 
-<p></p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> <span class="token keyword">set</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> newArr <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">from<span class="token punctuation">(</span></span><span class="token keyword">set</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // Array.from方法可以将 Set 结构转为数组。
 </span>
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // [1, 2, 3]
-</span></code></p></pre>2.Object.assign()<p></p>
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // [1, 2, 3]
+</span></code></pre>2.Object.assign()
 
-<p>Object.assign()也是ES6中提供的对象的扩展方法，其可以用于对象的合并拷贝，比如：
-</p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Object.assign()也是ES6中提供的对象的扩展方法，其可以用于对象的合并拷贝，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> obj2 <span class="token operator">=</span> <span class="token punctuation">{</span>b<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> obj3 <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign<span class="token punctuation">(</span></span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> obj1<span class="token punctuation">,</span> obj2<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>obj3<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // {a: 1, b: 2}
-</span></code></p></pre>3.map()<p></p>
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>obj3<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // {a: 1, b: 2}
+</span></code></pre>3.map()
 
-<p>map方法用于遍历数组，有返回值，可以对数组的每一项进行操作并生成一个新的数组，有些时候可以代替for和forEach循环，简化代码，比如：
-</p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr3 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+map方法用于遍历数组，有返回值，可以对数组的每一项进行操作并生成一个新的数组，有些时候可以代替for和forEach循环，简化代码，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr3 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 <span class="token keyword">let</span> newArr3 <span class="token operator">=</span> arr3<span class="token punctuation">.</span><span class="token function">map<span class="token punctuation">(</span></span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> e <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 给数组每一项乘以10
 </span>
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr3<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // [10, 20, 30, 40, 50]
-</span></code></p></pre>4.filter()<p></p>
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr3<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // [10, 20, 30, 40, 50]
+</span></code></pre>4.filter()
 
-<p>filter方法同样用于遍历数组，顾名思义，就是过滤数组，在每一项元素后面触发一个回调函数，通过判断，保留或移除当前项，最后返回一个新的数组，比如：
-</p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr4 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+filter方法同样用于遍历数组，顾名思义，就是过滤数组，在每一项元素后面触发一个回调函数，通过判断，保留或移除当前项，最后返回一个新的数组，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr4 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 <span class="token keyword">let</span> newArr4 <span class="token operator">=</span> arr4<span class="token punctuation">.</span><span class="token function">filter<span class="token punctuation">(</span></span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> e <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 取模，过滤余数不为0的数
 </span>
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr4<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // [2，4]
-</span></code></p></pre>5.some()<p></p>
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr4<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // [2，4]
+</span></code></pre>5.some()
 
-<p>some方法用于遍历数组，在每一项元素后面触发一个回调函数，只要一个满足条件就返回true，否则返回false，类似于 || 比较，比如：
-</p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr5 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>result<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>result<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+some方法用于遍历数组，在每一项元素后面触发一个回调函数，只要一个满足条件就返回true，否则返回false，类似于 || 比较，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr5 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>result<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>result<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 <span class="token keyword">let</span> newArr5 <span class="token operator">=</span> arr5<span class="token punctuation">.</span><span class="token function">some<span class="token punctuation">(</span></span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> e<span class="token punctuation">.</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 只要一个为true，即为true
 </span>
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr5<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // true
-</span></code></p></pre>6. every()<p></p>
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr5<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // true
+</span></code></pre>6. every()
 
-<p>every方法用于遍历数组，在每一项元素后面触发一个回调函数，只要一个不满足条件就返回false，否则返回true，类似于 &amp;&amp; 比较，比如：
-</p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr6 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>result<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>result<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+every方法用于遍历数组，在每一项元素后面触发一个回调函数，只要一个不满足条件就返回false，否则返回true，类似于 &amp;&amp; 比较，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> arr6 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>result<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>result<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 <span class="token keyword">let</span> newArr6 <span class="token operator">=</span> arr6<span class="token punctuation">.</span><span class="token function">every<span class="token punctuation">(</span></span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> e<span class="token punctuation">.</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 只要一个为false，即为false
 </span>
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr6<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // false
-</span></code></p></pre>7.~~运算符<p></p>
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>newArr6<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // false
+</span></code></pre>7.~~运算符
 
-<p>~符号用在JavaScript中有按位取反的作用，~~即是取反两次，而位运算的操作值要求是整数，其结果也是整数，所以经过位运算的都会自动变成整数，可以巧妙的去掉小数部分，类似于parseInt，比如：
-</p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1.23</span><span class="token punctuation">;</span>
+~符号用在JavaScript中有按位取反的作用，~~即是取反两次，而位运算的操作值要求是整数，其结果也是整数，所以经过位运算的都会自动变成整数，可以巧妙的去掉小数部分，类似于parseInt，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1.23</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1.23</span><span class="token punctuation">;</span>
 
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token operator">~</span><span class="token operator">~</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 1
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token operator">~</span><span class="token operator">~</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 1
 </span>console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span><span class="token operator">~</span><span class="token operator">~</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // -1
-</span></code></p></pre>8.||运算符<p></p>
+</span></code></pre>8.||运算符
 
-<p>巧妙的使用 || 运算符我们可以给变量设置默认值，比如：
-</p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+巧妙的使用 || 运算符我们可以给变量设置默认值，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">let</span> d <span class="token operator">=</span> c <span class="token operator">||</span> <span class="token number">2</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 如果c的值为true则取存在的值，否则为2
 </span>
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>d<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 1
-</span></code></p></pre>9. ...运算符<p></p>
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>d<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 1
+</span></code></pre>9. ...运算符
 
-<p>...运算符是ES6中用于解构数组的方法，可以用于快速获取数组的参数，比如：
-</p><pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> <span class="token punctuation">[</span>num1<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>nums<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+...运算符是ES6中用于解构数组的方法，可以用于快速获取数组的参数，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> <span class="token punctuation">[</span>num1<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>nums<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-</code><p><code class=" language-javascript">console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>num1<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 1
+console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>num1<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // 1
 </span>console<span class="token punctuation">.</span><span class="token function">log<span class="token punctuation">(</span></span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true"> // [2, 3]
-</span></code></p></pre>10. 三元运算符<p></p>
+</span></code></pre>10. 三元运算符
 
-<p>该运算符应该大家都比较熟悉，在默写情况下可以简化if else的写法，比如：
-~~~~{javascript}
-let e = true,
-    f = '';</p>
+该运算符应该大家都比较熟悉，在默写情况下可以简化if else的写法，比如：
+<pre class=" language-javascript"><code class=" language-javascript"><span class="token keyword">let</span> e <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    f <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
 
-<p>if (e) {
-    f = 'man';
-} else {
-    f = 'woman';
-}</p>
-
-<p>// 等同于
-e ? f = 'man' : f = 'woman';
-~~~~</p>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    f <span class="token operator">=</span> <span class="token string">'man'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    f <span class="token operator">=</span> <span class="token string">'woman'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">
+// 等同于
+</span>e <span class="token operator">?</span> f <span class="token operator">=</span> <span class="token string">'man'</span> <span class="token punctuation">:</span> f <span class="token operator">=</span> <span class="token string">'woman'</span><span class="token punctuation">;</span>
+</code></pre>
 <!-- content end -->
         </div>
         <br>

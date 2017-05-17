@@ -28,7 +28,7 @@
         <div id="md" style="display: none;">
         <!-- 不能有缩进 -->
 <!-- markdown -->
-### 本地文件上传到git远程仓库
+## 本地文件上传到git远程仓库
 
 ```
 git init
@@ -42,12 +42,39 @@ git push origin master
 // 如果存在多个远程仓库
 git push -u other master
 ```
+
+## git lab 初始化命令行指令
+
+
+Git 全局设置
+```
+git config --global user.name "xxx"
+git config --global user.email "xxx@xxx.com"
+```
+创建新版本库
+```
+git clone 远程git地址
+cd eye_ep
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+```
+已存在的文件夹或 Git 仓库
+```
+cd existing_folder
+git init
+git remote add origin 远程git地址
+git add .
+git commit
+git push -u origin master
+```
 <!-- markdown end -->
         </div>
         <div class="entry" id="main">
         <!-- 不能有缩进 -->
 <!-- content -->
-<h3 id="git">本地文件上传到git远程仓库</h3>
+<h2 id="git">本地文件上传到git远程仓库</h2>
 
 <pre><code>git init
 git remote rm origin
@@ -59,6 +86,34 @@ git commit -m "commit msg"
 git push origin master  
 // 如果存在多个远程仓库
 git push -u other master
+</code></pre>
+
+<h2 id="gitlab">git lab 初始化命令行指令</h2>
+
+<p>Git 全局设置</p>
+
+<pre><code>git config --global user.name "xxx"
+git config --global user.email "xxx@xxx.com"
+</code></pre>
+
+<p>创建新版本库</p>
+
+<pre><code>git clone 远程git地址
+cd eye_ep
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+</code></pre>
+
+<p>已存在的文件夹或 Git 仓库</p>
+
+<pre><code>cd existing_folder
+git init
+git remote add origin 远程git地址
+git add .
+git commit
+git push -u origin master
 </code></pre>
 <!-- content end -->
         </div>

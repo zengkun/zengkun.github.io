@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="blog" />
+    <meta name="Description" content="blog" />
+    <title>学习笔记</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <ul id="pages">
+                <li><a href="/">home</a></li>
+                <li><a href="/#/tags">tags</a></li>
+                <li><a href="/#/archive">archive</a></li>
+            </ul>
+        </div>
+        <div class="wrap-header">
+            <h1>
+                <a href="/" id="title"></a>
+            </h1>
+        </div>
+        <div id="md" style="display: none;">
+        <!-- 不能有缩进 -->
+<!-- markdown -->
+### 可在文件中定义全局`less`变量和样式
+
+
+1.需要安装`sass-resources-loader`
+```bash
+npm install sass-resources-loader --save-dev
+```
+
+2.在配置文件`build`文件夹下面的`utils.js`找到 
+
+```javascript
+less: generateLoaders('less'), 
+```
+修改成：
+
+```javascript
+less: generateLoaders('less').concat({
+    loader: 'sass-resources-loader',
+    options: {
+      resources: path.resolve(__dirname, '../src/assets/css/yourGlobalLess.less')
+    }
+}),
+```
+
+注：`yourGlobalLess.less`是你要引入的全局`less`文件
+
+<!-- markdown end -->
+        </div>
+        <div class="entry" id="main">
+        <!-- 不能有缩进 -->
+<!-- content -->
+<h3 id="less">可在文件中定义全局<code>less</code>变量和样式</h3>
+
+<p>1.需要安装<code>sass-resources-loader</code></p>
+
+<pre><code class="bash">npm install sass-resources-loader --save-dev
+</code></pre>
+
+<p>2.在配置文件<code>build</code>文件夹下面的<code>utils.js</code>找到 </p>
+
+<pre><code class="javascript">less: generateLoaders('less'), 
+</code></pre>
+
+<p>修改成：</p>
+
+<pre><code class="javascript">less: generateLoaders('less').concat({
+    loader: 'sass-resources-loader',
+    options: {
+      resources: path.resolve(__dirname, '../src/assets/css/yourGlobalLess.less')
+    }
+}),
+</code></pre>
+
+<p>注：<code>yourGlobalLess.less</code>是你要引入的全局<code>less</code>文件</p>
+<!-- content end -->
+        </div>
+        <br>
+        <br>
+        <div id="disqus_thread"></div>
+        <div class="footer">
+            <p>© Copyright 2017 <a href="mailto:zengkun0415@sina.com"> zengkun0415@sina.com</a></p>
+        </div>
+    </div>
+    <script src="/main.js"></script>
+    <script id="content" type="text/mustache">
+        <h1>{{title}}</h1>
+        <div class="tag">
+            {{date}} by {{author}} {{#tags}}
+            <a href="/#/tag/{{name}}">#{{name}}</a> {{/tags}}
+        </div>
+    </script>
+    <script id="pagesTemplate" type="text/mustache">
+        {{#pages}}
+        <li>
+            <a href="{{path}}">{{title}}</a>
+        </li>
+        {{/pages}}
+    </script>
+    <script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "/main.json",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                $("#title").html(data.name);
+                var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+                var pagesHtml = pagesTemplate.render({
+                    "pages": data.pages
+                });
+                $("#pages").append(pagesHtml);
+                //path
+                var path = "global-less.html";
+                //path end
+                var now = 0;
+                for (var i = 0; i < data.posts.length; ++i)
+                    if (path == data.posts[i].path)
+                        now = i;
+                var post = data.posts[now];
+                var tmp = post.tags.split(" ");
+                var tags = [];
+                for (var i = 0; i < tmp.length; ++i)
+                    if (tmp[i].length > 0)
+                        tags.push({
+                            "name": tmp[i]
+                        });
+                var contentTemplate = Hogan.compile($("#content").html());
+                var contentHtml = contentTemplate.render({
+                    "title": post.title,
+                    "tags": tags,
+                    "date": post.date,
+                    "author": post.author ? post.author : data.name
+                });
+                $("#main").prepend(contentHtml);
+            }
+        });
+    });
+    </script>
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+    </script>
+</body>
+
+</html>

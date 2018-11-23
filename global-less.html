@@ -38,19 +38,20 @@ npm install sass-resources-loader --save-dev
 
 2.在配置文件`build`文件夹下面的`utils.js`找到 
 
-```{javascript}
+~~~~{javascript}
 less: generateLoaders('less'), 
-```
+~~~~
+
 修改成：
 
-```{javascript}
+~~~~{javascript}
 less: generateLoaders('less').concat({
     loader: 'sass-resources-loader',
     options: {
       resources: path.resolve(__dirname, '../src/assets/css/yourGlobalLess.less')
     }
 }),
-```
+~~~~
 
 注：`yourGlobalLess.less`是你要引入的全局`less`文件
 
@@ -68,17 +69,17 @@ less: generateLoaders('less').concat({
 
 <p>2.在配置文件<code>build</code>文件夹下面的<code>utils.js</code>找到 </p>
 
-<pre><code class="{javascript}">less: generateLoaders('less'), 
+<pre class=" language-javascript"><code class=" language-javascript">less<span class="token punctuation">:</span> <span class="token function">generateLoaders<span class="token punctuation">(</span></span><span class="token string">'less'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
 </code></pre>
 
 <p>修改成：</p>
 
-<pre><code class="{javascript}">less: generateLoaders('less').concat({
-    loader: 'sass-resources-loader',
-    options: {
-      resources: path.resolve(__dirname, '../src/assets/css/yourGlobalLess.less')
-    }
-}),
+<pre class=" language-javascript"><code class=" language-javascript">less<span class="token punctuation">:</span> <span class="token function">generateLoaders<span class="token punctuation">(</span></span><span class="token string">'less'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">concat<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+    loader<span class="token punctuation">:</span> <span class="token string">'sass-resources-loader'</span><span class="token punctuation">,</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      resources<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve<span class="token punctuation">(</span></span>__dirname<span class="token punctuation">,</span> <span class="token string">'../src/assets/css/yourGlobalLess.less'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 </code></pre>
 
 <p>注：<code>yourGlobalLess.less</code>是你要引入的全局<code>less</code>文件</p>

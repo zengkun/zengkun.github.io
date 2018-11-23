@@ -32,18 +32,18 @@
 
 
 1.需要安装`sass-resources-loader`
-```bash
+```
 npm install sass-resources-loader --save-dev
 ```
 
 2.在配置文件`build`文件夹下面的`utils.js`找到 
 
-```javascript
+```{javascript}
 less: generateLoaders('less'), 
 ```
 修改成：
 
-```javascript
+```{javascript}
 less: generateLoaders('less').concat({
     loader: 'sass-resources-loader',
     options: {
@@ -63,17 +63,17 @@ less: generateLoaders('less').concat({
 
 <p>1.需要安装<code>sass-resources-loader</code></p>
 
-<pre><code class="bash">npm install sass-resources-loader --save-dev
+<pre><code>npm install sass-resources-loader --save-dev
 </code></pre>
 
 <p>2.在配置文件<code>build</code>文件夹下面的<code>utils.js</code>找到 </p>
 
-<pre><code class="javascript">less: generateLoaders('less'), 
+<pre><code class="{javascript}">less: generateLoaders('less'), 
 </code></pre>
 
 <p>修改成：</p>
 
-<pre><code class="javascript">less: generateLoaders('less').concat({
+<pre><code class="{javascript}">less: generateLoaders('less').concat({
     loader: 'sass-resources-loader',
     options: {
       resources: path.resolve(__dirname, '../src/assets/css/yourGlobalLess.less')
